@@ -26,8 +26,14 @@ var coyote_timer = 0.0
 var buffer_timer = buffer_time
 var can_move = true
 
+# animation
+var target_rotation_degrees = 0.0
+
 func _enter_tree() -> void:
 	RoomManager.current_room.player = self
+
+func _process(dt: float) -> void:
+	sprite.rotation_degrees = lerp(sprite.rotation_degrees, target_rotation_degrees, 50 * dt)
 
 func _physics_process(delta: float) -> void:
 	coyote_timer += delta
@@ -49,7 +55,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y *= 0.5
 
 	if can_move:
-		# sprite.target_rotation_degrees = x_input * run_tilt_angle
+		target_rotation_degrees = x_input * run_tilt_angle
 		if x_input:
 			velocity.x = move_toward(velocity.x, x_input * max_speed, acceleration)
 			dust_parent.scale.x = -x_input

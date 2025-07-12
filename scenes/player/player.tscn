@@ -16,8 +16,8 @@ point_count = 3
 script = ExtResource("1_8afob")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, -5)
 texture = ExtResource("2_dovo2")
+offset = Vector2(0, -5)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
