@@ -2,7 +2,7 @@ class_name Player extends CharacterBody2D
 
 @export_category("Movement")
 @export var max_speed = 150.0
-@export var jump_velocity = 380.0
+@export var jump_velocity = 300.0
 @export var gravity = 1200.0
 @export var fall_gravity = 2000.0
 @export var wall_fall_velocity = 80.0
@@ -18,6 +18,8 @@ class_name Player extends CharacterBody2D
 @export var stretch = 0.6
 
 @onready var sprite: Sprite2D = $Sprite
+@onready var dust_parent: Node2D = $DustParent
+@onready var dust_particles: CPUParticles2D = $DustParent/DustParticles
 
 var jumped = false
 var coyote_timer = 0.0
@@ -42,12 +44,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.y += gravity * delta
 
+		# variable jump height
+		if Input.is_action_just_released("c") and velocity.y < 0:
+			velocity.y *= 0.5
+
 	if can_move:
 		# sprite.target_rotation_degrees = x_input * run_tilt_angle
 		if x_input:
 			velocity.x = move_toward(velocity.x, x_input * max_speed, acceleration)
+			dust_parent.scale.x = -x_input
+			dust_particles.emitting = is_on_floor()
 		else:
 			velocity.x = move_toward(velocity.x, 0.0, deceleration)
+			dust_particles.emitting = false
 	else:
 		# sprite.target_rotation_degrees = 0
 		velocity.x = 0
