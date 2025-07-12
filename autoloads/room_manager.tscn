@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtn084ggq5j4t"]
+
+[ext_resource type="Script" uid="uid://b545sxhf5a5rh" path="res://autoloads/room_manager.gd" id="1_ek3bw"]
+[ext_resource type="Texture2D" uid="uid://c8pvsp2v2id6v" path="res://assets/screen-transition.png" id="2_8k7mx"]
+
+[sub_resource type="Animation" id="Animation_5gct7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-160, -120)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(160, 120)]
+}
+
+[sub_resource type="Animation" id="Animation_lfxxf"]
+resource_name = "transition"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Top:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -240)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bottom:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(320, 240), Vector2(320, 480)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x5udh"]
+_data = {
+&"RESET": SubResource("Animation_5gct7"),
+&"transition": SubResource("Animation_lfxxf")
+}
+
+[node name="RoomManager" type="CanvasLayer"]
+script = ExtResource("1_ek3bw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x5udh")
+}
+
+[node name="Top" type="TextureRect" parent="."]
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+texture = ExtResource("2_8k7mx")
+stretch_mode = 2
+
+[node name="Bottom" type="TextureRect" parent="."]
+offset_left = 160.0
+offset_top = 120.0
+offset_right = 480.0
+offset_bottom = 360.0
+rotation = 3.14159
+texture = ExtResource("2_8k7mx")
+stretch_mode = 2
