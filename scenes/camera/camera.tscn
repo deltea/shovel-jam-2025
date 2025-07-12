@@ -5,3 +5,4 @@
 [node name="Camera" type="Camera2D"]
 position_smoothing_enabled = true
 script = ExtResource("1_xejhd")
+follow_speed = 6.0
