@@ -34,6 +34,7 @@ shape = SubResource("CapsuleShape2D_8afob")
 z_index = -5
 position = Vector2(4, -1)
 rotation = -1.0472
+emitting = false
 amount = 6
 texture = ExtResource("3_gmlin")
 lifetime = 0.2
