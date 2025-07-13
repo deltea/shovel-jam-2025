@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1mxsisctpeug"]
+[gd_scene load_steps=7 format=3 uid="uid://b1mxsisctpeug"]
 
 [ext_resource type="Script" uid="uid://di0pgkxi3lvhw" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://d0rcgrkery2yp" path="res://assets/player.png" id="2_dovo2"]
@@ -8,8 +8,13 @@
 radius = 5.0
 height = 10.0
 
+[sub_resource type="Curve" id="Curve_lvxji"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_gmlin"]
-_data = [Vector2(0, 0.23464), 0.0, 0.0, 0, 0, Vector2(0.792271, 0.568169), 0.0, 0.0, 0, 0, Vector2(0.906456, 0.138923), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.23464), 0.0, 0.0, 0, 0, Vector2(0.910848, 0.553001), 0.0, 0.0, 0, 0, Vector2(1, 0.12092), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [node name="Player" type="CharacterBody2D"]
@@ -29,7 +34,6 @@ shape = SubResource("CapsuleShape2D_8afob")
 z_index = -5
 position = Vector2(4, -1)
 rotation = -1.0472
-emitting = false
 amount = 6
 texture = ExtResource("3_gmlin")
 lifetime = 0.2
@@ -40,6 +44,7 @@ spread = 90.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 15.0
 initial_velocity_max = 15.0
+damping_curve = SubResource("Curve_lvxji")
 scale_amount_min = 0.8
 scale_amount_curve = SubResource("Curve_gmlin")
 color = Color(0.333333, 0.333333, 0.333333, 1)

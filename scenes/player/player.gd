@@ -25,8 +25,6 @@ var jumped = false
 var coyote_timer = 0.0
 var buffer_timer = buffer_time
 var can_move = true
-
-# animation
 var target_rotation_degrees = 0.0
 
 func _enter_tree() -> void:
@@ -75,6 +73,10 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("c") and not is_on_floor():
 		buffer_timer = 0.0
+
+	if Input.is_action_just_pressed("x"):
+		# some cool mechanic
+		pass
 
 	var was_on_floor = is_on_floor()
 	move_and_slide()

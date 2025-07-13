@@ -450,10 +450,15 @@ texture = ExtResource("1_1eosy")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_nlxlh")
 
-[node name="Tilemap" type="Parallax2D"]
+[node name="Tilemap" type="Node2D"]
 
-[node name="Background" type="TileMapLayer" parent="."]
+[node name="BackgroundParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.9, 0.9)
+
+[node name="Background" type="TileMapLayer" parent="BackgroundParallax"]
 tile_set = SubResource("TileSet_4p81h")
 
-[node name="Foreground" type="TileMapLayer" parent="."]
+[node name="ForegroundParallax" type="Parallax2D" parent="."]
+
+[node name="Foreground" type="TileMapLayer" parent="ForegroundParallax"]
 tile_set = SubResource("TileSet_t6vky")
