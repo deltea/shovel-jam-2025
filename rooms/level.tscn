@@ -11,8 +11,9 @@ script = ExtResource("1_0dt1f")
 metadata/_edit_horizontal_guides_ = [120.0, 240.0]
 metadata/_edit_vertical_guides_ = [160.0, 320.0]
 
-[node name="Camera" parent="." instance=ExtResource("4_tibj6")]
+[node name="Camera" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("4_tibj6")]
 position = Vector2(160, 120)
+follow = NodePath("../Player")
 
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(0.266667, 0.266667, 0.266667, 1)

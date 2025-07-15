@@ -31,6 +31,7 @@ var can_move = true
 var target_rotation_degrees = 0.0
 var direction = 1
 var target_bat_rotation = 0.0
+var bat_x_scale = 0.0
 
 func _enter_tree() -> void:
 	RoomManager.current_room.player = self
@@ -45,9 +46,11 @@ func _process(dt: float) -> void:
 	# bat positioning
 	var bat_direction = (Input.get_vector("left", "right", "up", "down") if direction == 1 else Input.get_vector("right", "left", "down", "up")).angle()
 	bat_anchor.position = bat_anchor.position.lerp(sprite.global_position, 60 * dt)
-	bat_anchor.rotation = lerp_angle(bat_anchor.rotation, bat_direction, 10 * dt)
-	bat_anchor.scale.x = lerpf(bat_anchor.scale.x, direction, 12 * dt)
-	bat_sprite.rotation = lerp_angle(bat_sprite.rotation, target_bat_rotation, 10 * dt)
+	# bat_anchor.rotation = lerp_angle(bat_anchor.rotation, bat_direction, 10 * dt)
+	# bat_anchor.scale.x = lerpf(bat_anchor.scale.x, -direction, 12 * dt)
+	# bat_sprite.rotation = lerp_angle(bat_sprite.rotation, target_bat_rotation, 10 * dt)
+	bat_x_scale = lerp(bat_x_scale, target_bat_rotation, 20 * dt)
+	bat_anchor.scale.x = abs(bat_x_scale)
 
 	bat_collider.rotation = bat_direction
 	bat_collider.scale.x = direction
@@ -111,9 +114,10 @@ func _physics_process(delta: float) -> void:
 			(collider as RigidBody2D).apply_force(-collision.get_normal() * push_force)
 
 func swing_bat(dir: Vector2):
-	bat_sprite.rotation = target_bat_rotation + PI
+	# bat_sprite.rotation = target_bat_rotation + PI
+	target_bat_rotation = 1.0 if target_bat_rotation < 0 else -1.0
 	Clock.hitstop(0.1)
-	RoomManager.current_room.camera.shake(0.1, 0.2)
-	var collisions = bat_collider.get_overlapping_bodies()
-	for body in collisions:
-		velocity = dir * 600
+	RoomManager.current_room.camera.shake(0.1, 1)
+	# var collisions = bat_collider.get_overlapping_bodies()
+	# for body in collisions:
+	# 	velocity = dir * 600

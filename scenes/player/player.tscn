@@ -80,8 +80,8 @@ z_index = 5
 position = Vector2(0, -5)
 
 [node name="Sprite" type="Sprite2D" parent="Bat"]
-position = Vector2(7, -2)
-rotation = 0.214199
+position = Vector2(10, -2)
+rotation = 0.382411
 texture = ExtResource("4_lvxji")
 offset = Vector2(-0.373506, -8.24773)
 
