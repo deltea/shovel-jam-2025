@@ -76,13 +76,14 @@ shape = SubResource("RectangleShape2D_gmlin")
 
 [node name="Bat" type="Node2D" parent="."]
 top_level = true
-z_index = 5
+z_index = -5
 position = Vector2(0, -5)
 
 [node name="Sprite" type="Sprite2D" parent="Bat"]
-position = Vector2(10, -2)
-rotation = 0.382411
+self_modulate = Color(0, 0, 1, 1)
+position = Vector2(7, 0.715978)
+rotation = 0.349066
 texture = ExtResource("4_lvxji")
-offset = Vector2(-0.373506, -8.24773)
+offset = Vector2(-0.373506, -11.0595)
 
 [connection signal="body_entered" from="BallArea" to="." method="_on_ball_area_body_entered"]

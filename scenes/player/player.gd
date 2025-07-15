@@ -30,14 +30,13 @@ var buffer_timer = buffer_time
 var can_move = true
 var target_rotation_degrees = 0.0
 var direction = 1
-var target_bat_rotation = 0.0
-var bat_x_scale = 0.0
 
 func _enter_tree() -> void:
 	RoomManager.current_room.player = self
 
 func _ready() -> void:
-	target_bat_rotation = bat_sprite.rotation
+	# target_bat_rotation = bat_sprite.rotation
+	pass
 
 func _process(dt: float) -> void:
 	dust_parent.scale.x = -direction
@@ -46,11 +45,6 @@ func _process(dt: float) -> void:
 	# bat positioning
 	var bat_direction = (Input.get_vector("left", "right", "up", "down") if direction == 1 else Input.get_vector("right", "left", "down", "up")).angle()
 	bat_anchor.position = bat_anchor.position.lerp(sprite.global_position, 60 * dt)
-	# bat_anchor.rotation = lerp_angle(bat_anchor.rotation, bat_direction, 10 * dt)
-	# bat_anchor.scale.x = lerpf(bat_anchor.scale.x, -direction, 12 * dt)
-	# bat_sprite.rotation = lerp_angle(bat_sprite.rotation, target_bat_rotation, 10 * dt)
-	bat_x_scale = lerp(bat_x_scale, target_bat_rotation, 20 * dt)
-	bat_anchor.scale.x = abs(bat_x_scale)
 
 	bat_collider.rotation = bat_direction
 	bat_collider.scale.x = direction
@@ -115,9 +109,24 @@ func _physics_process(delta: float) -> void:
 
 func swing_bat(dir: Vector2):
 	# bat_sprite.rotation = target_bat_rotation + PI
-	target_bat_rotation = 1.0 if target_bat_rotation < 0 else -1.0
-	Clock.hitstop(0.1)
-	RoomManager.current_room.camera.shake(0.1, 1)
+
+	# play tween
+	var tween = get_tree().create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(bat_anchor, "scale:x", -1, 0.08)
+	tween.tween_property(bat_sprite, "rotation", deg_to_rad(90), 0.08)
+
+	tween.chain().tween_callback(func():
+		Clock.hitstop(0.1)
+		RoomManager.current_room.camera.shake(0.1, 1)
+		bat_anchor.z_index = 5
+	)
+
+	tween.chain().tween_property(bat_anchor, "scale:x", 1, 0.15)
+	tween.tween_property(bat_sprite, "rotation", deg_to_rad(20), 0.15)
+	tween.chain().tween_callback(func():
+		bat_anchor.z_index = -5
+	)
+
 	# var collisions = bat_collider.get_overlapping_bodies()
 	# for body in collisions:
 	# 	velocity = dir * 600
