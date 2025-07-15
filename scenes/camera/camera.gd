@@ -6,6 +6,8 @@ class_name Camera extends Camera2D
 @export var impact_rotation = 5.0
 @export var shake_damping_speed = 1.0
 @export var focus_modifier = 0.08
+@export var impact_tilt_damping = 5.0
+@export var impact_tilt_magnitude = 2.0
 
 var shake_duration = 0.0;
 var shake_magnitude = 0.0;
@@ -31,6 +33,11 @@ func _process(delta: float) -> void:
 	# offset towards focus
 	focus_offset = lerp(focus_offset, focus * focus_modifier, follow_speed * delta)
 	offset = base_offset + shake_offset + focus_offset
+
+	rotation_degrees = lerp(rotation_degrees, 0.0, impact_tilt_damping * delta)
+
+func impact_tilt(direction: int):
+	rotation_degrees = direction * impact_tilt_magnitude
 
 func shake(duration: float, magnitude: float):
 	shake_duration = duration
