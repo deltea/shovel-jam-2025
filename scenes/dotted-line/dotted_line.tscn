@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqm2jcab6otjm"]
+
+[ext_resource type="Texture2D" uid="uid://dhfr82jflwcas" path="res://assets/dotted-line.png" id="1_mf4nu"]
+
+[node name="DottedLine" type="Line2D"]
+texture_repeat = 2
+width = 6.0
+texture = ExtResource("1_mf4nu")
+texture_mode = 1

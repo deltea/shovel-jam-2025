@@ -7,6 +7,8 @@ enum MenuState { START, SETTINGS, LEVEL_SELECT }
 @onready var start_options: Node2D = $Menus/TitleMenu/Options
 @onready var settings_options: Node2D = $Menus/SettingsMenu/Options
 @onready var settings_picker: Sprite2D = $Menus/SettingsMenu/Picker
+@onready var level_picker: Sprite2D = $Menus/LevelSelectMenu/Picker
+@onready var planets: Node2D = $Menus/LevelSelectMenu/Planets
 
 var state = MenuState.START
 var select_index = 1
@@ -64,11 +66,11 @@ func settings_process(dt: float) -> void:
 
 	# move settings selection
 	if Input.is_action_just_pressed("down") or Input.is_action_just_pressed("up"):
-		var dir = Input.get_axis("down", "up")
+		var dir = Input.get_axis("up", "down")
 		if dir > 0:
-			select_index = max(0, select_index - 1)
-		else:
 			select_index = min(settings_options.get_child_count() - 1, select_index + 1)
+		else:
+			select_index = max(0, select_index - 1)
 
 		camera.change_focus(Vector2(0, settings_options.get_child(select_index).position.y))
 
@@ -85,8 +87,19 @@ func settings_process(dt: float) -> void:
 			current_option.call("change_value", dir)
 
 func level_select_process(dt: float) -> void:
+	# animations
+	level_picker.global_position = lerp(level_picker.global_position, planets.get_child(select_index).global_position, 20 * dt)
+	camera.change_focus(level_picker.position - Vector2(160, 120))
+
 	if Input.is_action_just_pressed("x"):
 		change_state(MenuState.START)
+
+	if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("up"):
+		select_index = max(0, select_index - 1)
+		planets.get_child(select_index).call("selected")
+	elif Input.is_action_just_pressed("down") or Input.is_action_just_pressed("right"):
+		select_index = min(planets.get_child_count() - 1, select_index + 1)
+		planets.get_child(select_index).call("selected")
 
 func change_state(new_state: MenuState) -> void:
 	state = new_state
@@ -103,5 +116,6 @@ func change_state(new_state: MenuState) -> void:
 			camera.follow = $Menus/SettingsMenu
 		MenuState.LEVEL_SELECT:
 			camera.follow = $Menus/LevelSelectMenu
+			planets.get_child(select_index).call("selected")
 		_:
 			camera.follow = $Menus/TitleMenu

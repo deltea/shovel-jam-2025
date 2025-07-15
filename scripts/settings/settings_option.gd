@@ -21,6 +21,9 @@ func change_value(value: int) -> void:
 	RoomManager.current_room.camera.shake(0.08, 1.5)
 
 func select():
+	if not bool_value:
+		return
+
 	current_value = fmod(current_value + 1, value_max)
 	label.text = value_to_label(current_value)
 	RoomManager.current_room.camera.shake(0.08, 1.5)

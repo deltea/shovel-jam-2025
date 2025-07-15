@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=3 format=3 uid="uid://bv1lcpulvfomi"]
+
+[ext_resource type="Script" uid="uid://cbsgtcl8vp1ho" path="res://scripts/resources/level_resource.gd" id="1_4a6dt"]
+[ext_resource type="Texture2D" uid="uid://dx7n2f4u461r2" path="res://color-palettes/forest.png" id="1_6xd7q"]
+
+[resource]
+script = ExtResource("1_4a6dt")
+name = "trees"
+palette = ExtResource("1_6xd7q")
+metadata/_custom_type_script = "uid://cbsgtcl8vp1ho"

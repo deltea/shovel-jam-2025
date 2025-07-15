@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcatad8tysjfb"]
+
+[ext_resource type="Script" uid="uid://n4g6skgdxphl" path="res://scenes/planet-select/planet_select.gd" id="1_cj5gb"]
+[ext_resource type="Texture2D" uid="uid://0ukpqw2h8gx3" path="res://assets/planets/rock.png" id="1_t572q"]
+
+[node name="PlanetSelect" type="Sprite2D"]
+texture = ExtResource("1_t572q")
+script = ExtResource("1_cj5gb")
