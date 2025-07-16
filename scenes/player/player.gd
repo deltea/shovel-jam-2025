@@ -11,9 +11,9 @@ class_name Player extends CharacterBody2D
 @export var coyote_time = 0.15
 @export var buffer_time = 0.15
 @export var push_force = 0.0
-@export var parry_velocity = 400.0
+@export var parry_velocity = 300.0
 @export var parry_extra_y = 200.0
-@export var parrying_acceleration = 2000.0
+# @export var parrying_acceleration = 2000.0
 
 @export_category("Animation")
 @export var run_tilt_angle = 20.0
@@ -54,7 +54,7 @@ func _process(dt: float) -> void:
 
 	bat_anchor.position = bat_anchor.position.lerp(sprite.global_position, 60 * dt)
 	bat_flip.scale.x = lerp(bat_flip.scale.x, float(-direction), 20 * dt)
-	bat_anchor.rotation_degrees = lerp(bat_anchor.rotation_degrees, bat_direction, 32 * dt)
+	bat_anchor.rotation_degrees = lerp(bat_anchor.rotation_degrees, bat_direction, 50 * dt)
 
 	bat_collider.rotation_degrees = bat_direction
 	bat_collider.scale.x = direction
@@ -84,11 +84,11 @@ func _physics_process(dt: float) -> void:
 	if can_move:
 		target_rotation_degrees = x_input * run_tilt_angle
 		if is_hitting:
-			if x_input:
-				velocity.x += parrying_acceleration * dt * x_input
+			# if x_input:
+			# 	velocity.x += parrying_acceleration * dt * x_input
 
 			var y_input = Input.get_axis("up", "down")
-			velocity.y += parrying_acceleration * dt * y_input
+			# velocity.y += parrying_acceleration * dt * y_input
 		else:
 			if x_input:
 				# x acceleration
@@ -130,16 +130,18 @@ func swing_bat(dir: Vector2):
 	$ParryTimer.start()
 
 	var tween = get_tree().create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(bat_anchor, "scale:x", -1, 0.08)
-	tween.tween_property(bat_sprite, "rotation", deg_to_rad(90), 0.08)
+	tween.tween_property(bat_anchor, "scale:x", -1, 0.0	)
+	tween.tween_property(bat_sprite, "rotation", deg_to_rad(90), 0.0	)
 
 	tween.chain().tween_callback(func():
 		bat_anchor.z_index = 5
 
-		var collisions = bat_collider.get_overlapping_bodies()
-		if collisions.size() > 0:
+		var collisions = bat_collider.get_overlapping_areas()
+		var filtered_collisions = collisions.filter(func(area): return area is HitArea)
+		if filtered_collisions.size() > 0:
 			is_hitting = true
 			velocity = dir * parry_velocity + Vector2(0, -parry_extra_y)
+			filtered_collisions[0].hit()
 			Clock.hitstop(0.1)
 			RoomManager.current_room.camera.impact_tilt(direction)
 			RoomManager.current_room.camera.shake(0.1, 1)

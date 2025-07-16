@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="shovel jam 2025"
-run/main_scene="uid://dmf0uqbm0q3tv"
+run/main_scene="uid://bp3plwo8243wy"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false

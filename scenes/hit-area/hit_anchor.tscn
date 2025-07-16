@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmg44mswtdj5v"]
+
+[ext_resource type="PackedScene" uid="uid://neagtykblwvx" path="res://scenes/hit-area/hit_area.tscn" id="1_ixx0w"]
+[ext_resource type="Texture2D" uid="uid://d1268ehvpytp6" path="res://assets/hit_area.png" id="2_oyyjd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oyyjd"]
+radius = 8.06226
+
+[node name="HitAnchor" instance=ExtResource("1_ixx0w")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_oyyjd")
+
+[node name="CollisionShape" parent="." index="1"]
+shape = SubResource("CircleShape2D_oyyjd")

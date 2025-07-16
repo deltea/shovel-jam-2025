@@ -23,7 +23,7 @@ point_count = 3
 radius = 11.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
-size = Vector2(36, 20)
+size = Vector2(40, 20)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -75,7 +75,7 @@ position = Vector2(0, -5)
 collision_layer = 0
 
 [node name="CollisionShape" type="CollisionShape2D" parent="BatArea"]
-position = Vector2(18, 0)
+position = Vector2(16, 0)
 shape = SubResource("RectangleShape2D_gmlin")
 
 [node name="BatAnchor" type="Node2D" parent="."]
