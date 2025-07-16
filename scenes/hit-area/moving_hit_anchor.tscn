@@ -18,6 +18,7 @@ script = ExtResource("1_m11bc")
 position = Vector2(64, 208)
 
 [node name="HitAnchor" parent="PathFollow" instance=ExtResource("1_vptmg")]
+z_index = 0
 
 [node name="DottedLine" parent="." instance=ExtResource("3_3k5ny")]
 z_index = -5

@@ -6,7 +6,7 @@ var pitch_speed = 100.0
 var direction = Vector2.RIGHT
 
 func _ready() -> void:
-	await Clock.wait(45)
+	await Clock.wait(30)
 	queue_free()
 
 func _process(dt: float) -> void:
