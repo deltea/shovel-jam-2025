@@ -110,12 +110,12 @@ func change_state(new_state: MenuState) -> void:
 
 	match state:
 		MenuState.START:
-			camera.follow = $Menus/TitleMenu
+			camera.position = $Menus/TitleMenu.position
 			select_index = 1
 		MenuState.SETTINGS:
-			camera.follow = $Menus/SettingsMenu
+			camera.position = $Menus/SettingsMenu.position
 		MenuState.LEVEL_SELECT:
-			camera.follow = $Menus/LevelSelectMenu
+			camera.position = $Menus/LevelSelectMenu.position
 			planets.get_child(select_index).call("selected")
 		_:
-			camera.follow = $Menus/TitleMenu
+			camera.position = $Menus/TitleMenu.position

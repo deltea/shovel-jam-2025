@@ -1,12 +1,11 @@
 class_name Camera extends Camera2D
 
 @export var base_offset = Vector2.ZERO
-@export var follow: Node2D
 @export var follow_speed = 6.0
 @export var impact_rotation = 5.0
 @export var shake_damping_speed = 1.0
 @export var focus_modifier = 0.08
-@export var impact_tilt_damping = 5.0
+@export var impact_tilt_damping = 10.0
 @export var impact_tilt_magnitude = 2.0
 
 var shake_duration = 0.0;
@@ -18,10 +17,14 @@ var focus = Vector2.ZERO
 func _enter_tree() -> void:
 	RoomManager.current_room.camera = self
 
-func _process(delta: float) -> void:
-	if follow:
-		position = position.lerp(follow.position, follow_speed * delta)
+func _ready() -> void:
+	if RoomManager.current_room.limits_enabled:
+		limit_top = RoomManager.current_room.limit_top
+		limit_left = RoomManager.current_room.limit_left
+		limit_bottom = RoomManager.current_room.limit_bottom
+		limit_right = RoomManager.current_room.limit_right
 
+func _process(delta: float) -> void:
 	# screen shake stuff
 	if shake_duration > 0:
 		shake_offset = Vector2.from_angle(randf_range(0, PI*2)) * shake_magnitude
