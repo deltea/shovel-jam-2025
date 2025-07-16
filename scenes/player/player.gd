@@ -130,8 +130,8 @@ func swing_bat(dir: Vector2):
 	$ParryTimer.start()
 
 	var tween = get_tree().create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(bat_anchor, "scale:x", -1, 0.0	)
-	tween.tween_property(bat_sprite, "rotation", deg_to_rad(90), 0.0	)
+	tween.tween_property(bat_anchor, "scale:x", -1, 0.0)
+	tween.tween_property(bat_sprite, "rotation", deg_to_rad(90), 0.0)
 
 	tween.chain().tween_callback(func():
 		bat_anchor.z_index = 5

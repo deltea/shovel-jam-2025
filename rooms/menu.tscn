@@ -104,7 +104,7 @@ theme_override_fonts/normal_font = ExtResource("5_e0ykq")
 theme_override_fonts/italics_font = ExtResource("5_e0ykq")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[wave]JUMBOTRON"
+text = "[wave amp=50]JUMBOTRON"
 horizontal_alignment = 1
 vertical_alignment = 1
 

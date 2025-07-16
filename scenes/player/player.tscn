@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1mxsisctpeug"]
+[gd_scene load_steps=10 format=3 uid="uid://b1mxsisctpeug"]
 
 [ext_resource type="Script" uid="uid://di0pgkxi3lvhw" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://d0rcgrkery2yp" path="res://assets/player.png" id="2_dovo2"]
@@ -18,9 +18,6 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_gmlin"]
 _data = [Vector2(0, 0.23464), 0.0, 0.0, 0, 0, Vector2(0.910848, 0.553001), 0.0, 0.0, 0, 0, Vector2(1, 0.12092), 0.0, 0.0, 0, 0]
 point_count = 3
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
-radius = 11.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gmlin"]
 size = Vector2(40, 20)
@@ -61,15 +58,6 @@ scale_amount_min = 0.8
 scale_amount_curve = SubResource("Curve_gmlin")
 color = Color(0.333333, 0.333333, 0.333333, 1)
 
-[node name="BallArea" type="Area2D" parent="."]
-visible = false
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape" type="CollisionShape2D" parent="BallArea"]
-position = Vector2(0, -5)
-shape = SubResource("CircleShape2D_gmlin")
-
 [node name="BatArea" type="Area2D" parent="."]
 position = Vector2(0, -5)
 collision_layer = 0
@@ -98,5 +86,4 @@ offset = Vector2(-0.373506, -11.0595)
 wait_time = 0.2
 one_shot = true
 
-[connection signal="body_entered" from="BallArea" to="." method="_on_ball_area_body_entered"]
 [connection signal="timeout" from="ParryTimer" to="." method="_on_parry_timer_timeout"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfyy5o5encqnb"]
+
+[ext_resource type="PackedScene" uid="uid://neagtykblwvx" path="res://scenes/hit-area/hit_area.tscn" id="1_u5dhg"]
+[ext_resource type="Script" uid="uid://b1x6soksieu5i" path="res://scenes/hit-area/baseball.gd" id="2_cmc7o"]
+[ext_resource type="Texture2D" uid="uid://wqbvokyrnwym" path="res://assets/baseball.png" id="2_nx33j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nx33j"]
+radius = 8.0
+
+[node name="Baseball" instance=ExtResource("1_u5dhg")]
+script = ExtResource("2_cmc7o")
+spin_speed_multiplier = 3.0
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_nx33j")
+
+[node name="CollisionShape" parent="." index="1"]
+shape = SubResource("CircleShape2D_nx33j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

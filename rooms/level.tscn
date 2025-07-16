@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bp3plwo8243wy"]
+[gd_scene load_steps=8 format=4 uid="uid://bp3plwo8243wy"]
 
 [ext_resource type="Script" uid="uid://csbh6mrx1po1u" path="res://rooms/room.gd" id="1_0dt1f"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_4ve75"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b1mxsisctpeug" path="res://scenes/player/player.tscn" id="5_dg3qb"]
 [ext_resource type="PackedScene" uid="uid://bmg44mswtdj5v" path="res://scenes/hit-area/hit_anchor.tscn" id="5_x0uc3"]
 [ext_resource type="PackedScene" uid="uid://buh772eiaa5bm" path="res://scenes/hit-area/moving_hit_anchor.tscn" id="6_x0uc3"]
+[ext_resource type="PackedScene" uid="uid://dpiqml0sgr8ba" path="res://scenes/pitcher/pitcher.tscn" id="7_ar4t0"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_0dt1f")
@@ -38,5 +39,8 @@ position = Vector2(160, 191)
 position = Vector2(160, 105)
 
 [node name="MovingHitAnchor" parent="." instance=ExtResource("6_x0uc3")]
+
+[node name="Pitcher" parent="." instance=ExtResource("7_ar4t0")]
+position = Vector2(16, 120)
 
 [editable path="Tilemap"]
