@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8geeqbbs3mvq"]
+
+[ext_resource type="PackedScene" uid="uid://neagtykblwvx" path="res://scenes/hit-area/hit_area.tscn" id="1_o31oi"]
+[ext_resource type="Texture2D" uid="uid://bxtc5illu43wy" path="res://assets/generic/circle-big.png" id="2_3pfgg"]
+[ext_resource type="Script" uid="uid://bh6makumhhax7" path="res://scenes/hit-area/goal.gd" id="2_in8w6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3pfgg"]
+radius = 16.0
+
+[node name="Goal" instance=ExtResource("1_o31oi")]
+script = ExtResource("2_in8w6")
+disabled_color = Color(0, 0, 1, 1)
+enabled_color = Color(1, 0, 0, 1)
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_3pfgg")
+
+[node name="CollisionShape" parent="." index="1"]
+shape = SubResource("CircleShape2D_3pfgg")

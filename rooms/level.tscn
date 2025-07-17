@@ -1,16 +1,21 @@
-[gd_scene load_steps=9 format=4 uid="uid://bp3plwo8243wy"]
+[gd_scene load_steps=12 format=4 uid="uid://bp3plwo8243wy"]
 
-[ext_resource type="Script" uid="uid://csbh6mrx1po1u" path="res://rooms/room.gd" id="1_0dt1f"]
+[ext_resource type="Script" uid="uid://c65lao1k8q5b1" path="res://rooms/level.gd" id="1_ar4t0"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_4ve75"]
-[ext_resource type="Texture2D" uid="uid://cofy823rpklfr" path="res://color-palettes/electric.png" id="2_ianyd"]
+[ext_resource type="Texture2D" uid="uid://f1a8unsk6h86" path="res://color-palettes/lmao.png" id="2_ianyd"]
 [ext_resource type="PackedScene" uid="uid://v0qlcyty6g8i" path="res://scenes/tilemap/tilemap.tscn" id="3_tibj6"]
 [ext_resource type="PackedScene" uid="uid://b1mxsisctpeug" path="res://scenes/player/player.tscn" id="5_dg3qb"]
 [ext_resource type="PackedScene" uid="uid://bmg44mswtdj5v" path="res://scenes/hit-area/hit_anchor.tscn" id="5_x0uc3"]
 [ext_resource type="PackedScene" uid="uid://buh772eiaa5bm" path="res://scenes/hit-area/moving_hit_anchor.tscn" id="6_x0uc3"]
 [ext_resource type="PackedScene" uid="uid://dpiqml0sgr8ba" path="res://scenes/pitcher/pitcher.tscn" id="7_ar4t0"]
+[ext_resource type="PackedScene" uid="uid://bt1awmtu5v0rs" path="res://scenes/key/key.tscn" id="9_knkn0"]
+[ext_resource type="FontFile" uid="uid://dtec4w8hxc3v4" path="res://assets/fonts/hefty-me.ttf" id="10_yhl0x"]
+[ext_resource type="PackedScene" uid="uid://c8geeqbbs3mvq" path="res://scenes/hit-area/goal.tscn" id="11_2cqxi"]
 
-[node name="Level" type="Node2D"]
-script = ExtResource("1_0dt1f")
+[node name="Level" type="Node2D" node_paths=PackedStringArray("goal", "keys_parent")]
+script = ExtResource("1_ar4t0")
+goal = NodePath("Goal")
+keys_parent = NodePath("Keys")
 palette = ExtResource("2_ianyd")
 limit_top = -20
 limit_left = -20
@@ -45,5 +50,38 @@ position = Vector2(160, 105)
 
 [node name="Pitcher" parent="." instance=ExtResource("7_ar4t0")]
 position = Vector2(16, 120)
+
+[node name="Keys" type="Node" parent="."]
+
+[node name="Key" parent="Keys" instance=ExtResource("9_knkn0")]
+position = Vector2(264, 160)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Key2" parent="Keys" instance=ExtResource("9_knkn0")]
+position = Vector2(50, 157)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Key3" parent="Keys" instance=ExtResource("9_knkn0")]
+position = Vector2(222, 59)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="KeysText" type="RichTextLabel" parent="Canvas"]
+offset_left = 140.0
+offset_top = 214.0
+offset_right = 180.0
+offset_bottom = 234.0
+theme_override_fonts/normal_font = ExtResource("10_yhl0x")
+bbcode_enabled = true
+text = "[wave]X X -"
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="Goal" parent="." instance=ExtResource("11_2cqxi")]
+position = Vector2(60, 76)
 
 [editable path="Tilemap"]

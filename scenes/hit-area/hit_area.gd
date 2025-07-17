@@ -8,6 +8,9 @@ func _process(dt: float) -> void:
 	sprite.scale = sprite.scale.lerp(Vector2.ONE, 12 * dt)
 
 func hit() -> void:
+	Clock.hitstop(0.1)
+	RoomManager.current_room.camera.shake(0.1, 1)
+
 	strike_sprite.visible = true
 	strike_timer.start()
 	strike_sprite.rotation_degrees = randf_range(-180, 180)

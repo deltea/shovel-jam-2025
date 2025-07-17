@@ -142,9 +142,7 @@ func swing_bat(dir: Vector2):
 			is_hitting = true
 			velocity = dir * parry_velocity + Vector2(0, -parry_extra_y)
 			filtered_collisions[0].hit()
-			Clock.hitstop(0.1)
 			RoomManager.current_room.camera.impact_tilt(direction)
-			RoomManager.current_room.camera.shake(0.1, 1)
 	)
 
 	tween.chain().tween_property(bat_anchor, "scale:x", 1, 0.15).set_delay(0.1)
