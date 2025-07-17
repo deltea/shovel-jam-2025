@@ -34,4 +34,4 @@ func hit_goal():
 	# await Clock.wait(0.5)
 	var tween = get_tree().create_tween()
 	tween.set_ignore_time_scale(true)
-	tween.tween_property(Engine, "time_scale", 0.0, 0.6)
+	await tween.tween_property(Engine, "time_scale", 0.0, 0.6)

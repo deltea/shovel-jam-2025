@@ -17,5 +17,12 @@ func hit():
 		return
 
 	# super.hit()
+	strike_sprite.visible = true
+	strike_timer.start()
+	strike_sprite.rotation_degrees = randf_range(-180, 180)
+
+	strike_sprite.scale = Vector2.ONE * 1.3
+	sprite.scale = Vector2.ONE * 1.3
+
 	if RoomManager.current_room is Level:
 		RoomManager.current_room.hit_goal()
