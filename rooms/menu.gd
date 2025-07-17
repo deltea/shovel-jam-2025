@@ -2,6 +2,15 @@ class_name MenuRoom extends Room
 
 enum MenuState { START, SETTINGS, LEVEL_SELECT }
 
+@export var star_texture: Texture2D
+@export var big_star_texture: Texture2D
+@export var big_star_probability = 0.05
+@export var star_num = 100
+@export var star_left = -320
+@export var star_right = 320
+@export var star_top = 0
+@export var star_bottom = 480
+
 @onready var play_ball: Sprite2D = $Menus/TitleMenu/Options/PlayOption/PlayIcon
 @onready var start_picker: Sprite2D = $Menus/TitleMenu/Picker
 @onready var start_options: Node2D = $Menus/TitleMenu/Options
@@ -17,6 +26,14 @@ var target_picker_pos = Vector2.ZERO
 func _ready() -> void:
 	target_picker_pos = start_picker.position
 	change_state(MenuState.START)
+
+	var star_parent = Node2D.new()
+	for i in range(star_num):
+		var star = Sprite2D.new()
+		star.texture = big_star_texture if randf() < big_star_probability else star_texture
+		star.global_position = Vector2(randf_range(star_left, star_right), randf_range(star_top, star_bottom))
+		star_parent.add_child(star)
+	add_child(star_parent)
 
 func _process(dt: float) -> void:
 	# process for current state

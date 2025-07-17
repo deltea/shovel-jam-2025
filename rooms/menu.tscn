@@ -1,9 +1,11 @@
-[gd_scene load_steps=33 format=4 uid="uid://dmf0uqbm0q3tv"]
+[gd_scene load_steps=35 format=4 uid="uid://dmf0uqbm0q3tv"]
 
 [ext_resource type="Script" uid="uid://yqfpk2rabjnu" path="res://rooms/menu.gd" id="1_xe0oa"]
+[ext_resource type="Texture2D" uid="uid://dacgill14tub8" path="res://assets/star.png" id="2_eppcc"]
 [ext_resource type="PackedScene" uid="uid://v0qlcyty6g8i" path="res://scenes/tilemap/tilemap.tscn" id="2_iqh05"]
 [ext_resource type="Texture2D" uid="uid://c7ufww46b2d3j" path="res://color-palettes/silver.png" id="2_rwvnf"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_slw2s"]
+[ext_resource type="Texture2D" uid="uid://b7ftc2jp27cxc" path="res://assets/big-star.png" id="3_5bl6l"]
 [ext_resource type="PackedScene" uid="uid://bidf0spt461wy" path="res://scenes/camera/camera.tscn" id="4_cpwjf"]
 [ext_resource type="FontFile" uid="uid://cfylsgfwp1fy4" path="res://assets/fonts/GAMEPLAY-1987.ttf" id="5_e0ykq"]
 [ext_resource type="FontFile" uid="uid://dtec4w8hxc3v4" path="res://assets/fonts/hefty-me.ttf" id="6_h707c"]
@@ -55,6 +57,9 @@ metadata/_custom_type_script = "uid://cbsgtcl8vp1ho"
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_xe0oa")
+star_texture = ExtResource("2_eppcc")
+big_star_texture = ExtResource("3_5bl6l")
+star_left = 0
 palette = ExtResource("2_rwvnf")
 limits_enabled = false
 metadata/_edit_vertical_guides_ = [320.0, 160.0, -320.0, -160.0]
@@ -109,15 +114,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Picker" type="Sprite2D" parent="Menus/TitleMenu"]
-z_index = 5
+z_index = 10
 position = Vector2(160, 136)
 texture = ExtResource("10_mlpp8")
 
 [node name="Options" type="Node2D" parent="Menus/TitleMenu"]
+z_index = 10
 position = Vector2(160, 209)
 
 [node name="SettingsOption" type="Node2D" parent="Menus/TitleMenu/Options"]
-z_index = 5
 position = Vector2(-105, -6)
 
 [node name="SettingsText" type="RichTextLabel" parent="Menus/TitleMenu/Options/SettingsOption"]
@@ -140,7 +145,6 @@ position = Vector2(0, -18)
 texture = ExtResource("7_goeul")
 
 [node name="PlayOption" type="Node2D" parent="Menus/TitleMenu/Options"]
-z_index = 5
 
 [node name="PlayText" type="RichTextLabel" parent="Menus/TitleMenu/Options/PlayOption"]
 anchors_preset = 5
@@ -162,7 +166,6 @@ position = Vector2(0, -28)
 texture = ExtResource("7_dwdr0")
 
 [node name="QuitOption" type="Node2D" parent="Menus/TitleMenu/Options"]
-z_index = 5
 position = Vector2(105, -6)
 
 [node name="QuitText" type="RichTextLabel" parent="Menus/TitleMenu/Options/QuitOption"]
@@ -185,7 +188,7 @@ position = Vector2(0, -18)
 texture = ExtResource("10_7u8qn")
 
 [node name="BackIndicator" type="Node2D" parent="Menus/TitleMenu"]
-z_index = 5
+z_index = 10
 position = Vector2(80, 20)
 
 [node name="Label" type="RichTextLabel" parent="Menus/TitleMenu/BackIndicator"]
@@ -195,7 +198,7 @@ offset_right = 49.0
 offset_bottom = 12.0
 theme_override_fonts/normal_font = ExtResource("6_h707c")
 bbcode_enabled = true
-text = "back"
+text = "BACK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -203,7 +206,7 @@ vertical_alignment = 1
 texture = ExtResource("11_7u8qn")
 
 [node name="SelectIndicator" type="Node2D" parent="Menus/TitleMenu"]
-z_index = 5
+z_index = 10
 position = Vector2(201, 20)
 
 [node name="Label" type="RichTextLabel" parent="Menus/TitleMenu/SelectIndicator"]
