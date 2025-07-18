@@ -27,9 +27,10 @@ func _ready() -> void:
 	keys = keys_parent.get_children()
 	original_keys_length = keys.size()
 	update_keys()
+	results.visible = true
 
 func _process(dt: float) -> void:
-	time_text.text = time_to_text(timer, true)
+	time_text.text = Utils.time_to_text(timer, true)
 	timer += dt
 
 	if results_shown:
@@ -37,6 +38,8 @@ func _process(dt: float) -> void:
 			RoomManager.change_room("menu")
 		if Input.is_action_just_pressed("x"):
 			RoomManager.reload_level()
+
+	indicators.rotation_degrees = sin(Clock.time * 2.0) * 3
 
 	# scroll banner text to the right forever with no gaps at a set speed
 	banner_text_1.position.x -= 50 * dt
@@ -80,12 +83,12 @@ func hit_goal():
 	keys_text.visible = false
 
 	end_time = timer
-	var rank = get_ranking(end_time)
+	var rank = Utils.get_ranking(end_time)
 
 	var text = "[wave freq=2 amp=6][color=#555]TIME[/color]   "
-	text += time_to_text(end_time) + "\n\n"
+	text += Utils.time_to_text(end_time) + "\n\n"
 	for i in range(len(strike_times)):
-		text += "[color=#444]STRIKE  " + str(i + 1) + "[/color]   " + time_to_text(strike_times[i]) + "\n"
+		text += "[color=#444]STRIKE  " + str(i + 1) + "[/color]   " + Utils.time_to_text(strike_times[i]) + "\n"
 	results_text.text = text
 
 	results_text.visible_ratio = 0.0
@@ -117,9 +120,12 @@ func hit_goal():
 			SaveManager.save_data["level_" + level_resource.name + "_time"] = end_time
 			SaveManager.save_game()
 
+	if beat_highscore:
+		results_text.text += "\n\n"
+
 	var tween = get_tree().create_tween().set_parallel(true).set_ignore_time_scale(true)
 	tween.tween_property(Engine, "time_scale", 0.0, 0.6)
-	tween.tween_property(results, "position:y", 0.0, 1.0).set_delay(1.0).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(results, "position:y", 0.0, 1.0).set_delay(1.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	tween.chain().tween_callback(func():
 		Engine.time_scale = 1.0
 		rank_text.visible = true
@@ -134,22 +140,3 @@ func hit_goal():
 		highscore_text.visible = beat_highscore
 		results_shown = true
 	)
-
-func time_to_text(time: float, spacing: bool = false) -> String:
-	var minutes = int(time / 60)
-	var seconds = int(fmod(time, 60))
-	var milliseconds = int((time - int(time)) * 100)
-
-	return ("%02d : %02d . %02d" if spacing else "%02d:%02d.%02d") % [minutes, seconds, milliseconds]
-
-func get_ranking(time: float) -> Array[String]:
-	if time < 40:
-		return ["S", "SUPERB!"]
-	elif time < 70:
-		return ["A", "AMAZING!"]
-	elif time < 110:
-		return ["B", "NICE!"]
-	elif time < 160:
-		return ["C", "MEH"]
-	else:
-		return ["D", "YOU SUCK"]

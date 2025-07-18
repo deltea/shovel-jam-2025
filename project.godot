@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="shovel jam 2025"
-run/main_scene="uid://bp3plwo8243wy"
+run/main_scene="uid://dmf0uqbm0q3tv"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
@@ -24,6 +24,7 @@ RoomManager="*res://autoloads/room_manager.tscn"
 PaletteFilter="*res://autoloads/palette_filter.tscn"
 AudioManager="*res://autoloads/audio_manager.tscn"
 SaveManager="*res://autoloads/save_manager.gd"
+Utils="*res://autoloads/utils.gd"
 
 [display]
 

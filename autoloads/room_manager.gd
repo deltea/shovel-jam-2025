@@ -38,9 +38,12 @@ func change_room_from_scene(scene: PackedScene):
 	set_color_palette()
 	player.play("transition")
 
+func change_room_level(level_name: String):
+	change_room("levels/" + level_name + "_level")
+
 func reload_level():
 	if current_room is Level:
-		change_room(current_room.level_resource.name)
+		change_room_level(current_room.level_resource.name)
 
 func set_color_palette():
 	if current_room is Level:

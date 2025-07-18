@@ -1,13 +1,9 @@
-[gd_scene load_steps=19 format=4 uid="uid://bp3plwo8243wy"]
+[gd_scene load_steps=15 format=4 uid="uid://bp3plwo8243wy"]
 
-[ext_resource type="Script" uid="uid://c65lao1k8q5b1" path="res://rooms/level.gd" id="1_ar4t0"]
-[ext_resource type="Resource" uid="uid://bv1lcpulvfomi" path="res://levels/test.tres" id="2_3qwok"]
+[ext_resource type="Script" uid="uid://c65lao1k8q5b1" path="res://rooms/levels/level.gd" id="1_ar4t0"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_4ve75"]
 [ext_resource type="PackedScene" uid="uid://v0qlcyty6g8i" path="res://scenes/tilemap/tilemap.tscn" id="3_tibj6"]
 [ext_resource type="PackedScene" uid="uid://b1mxsisctpeug" path="res://scenes/player/player.tscn" id="5_dg3qb"]
-[ext_resource type="PackedScene" uid="uid://bmg44mswtdj5v" path="res://scenes/hit-area/hit_anchor.tscn" id="5_x0uc3"]
-[ext_resource type="PackedScene" uid="uid://buh772eiaa5bm" path="res://scenes/hit-area/moving_hit_anchor.tscn" id="6_x0uc3"]
-[ext_resource type="PackedScene" uid="uid://dpiqml0sgr8ba" path="res://scenes/pitcher/pitcher.tscn" id="7_ar4t0"]
 [ext_resource type="PackedScene" uid="uid://bt1awmtu5v0rs" path="res://scenes/key/key.tscn" id="9_knkn0"]
 [ext_resource type="FontFile" uid="uid://cfylsgfwp1fy4" path="res://assets/fonts/GAMEPLAY-1987.ttf" id="10_at2w1"]
 [ext_resource type="FontFile" uid="uid://dtec4w8hxc3v4" path="res://assets/fonts/hefty-me.ttf" id="10_yhl0x"]
@@ -21,14 +17,13 @@
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("goal", "keys_parent")]
 script = ExtResource("1_ar4t0")
-level_resource = ExtResource("2_3qwok")
 goal = NodePath("Goal")
 keys_parent = NodePath("Keys")
 limit_top = -20
 limit_left = -20
 limit_bottom = 260
 limit_right = 340
-metadata/_edit_horizontal_guides_ = [120.0, 240.0, -256.0, -16.0]
+metadata/_edit_horizontal_guides_ = [120.0, 240.0, -256.0, 0.0]
 metadata/_edit_vertical_guides_ = [160.0, 320.0, 0.0]
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -49,14 +44,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAA
 [node name="Player" parent="." instance=ExtResource("5_dg3qb")]
 position = Vector2(160, 216)
 
-[node name="HitAnchor" parent="." instance=ExtResource("5_x0uc3")]
-z_index = 0
-position = Vector2(160, 105)
-
-[node name="MovingHitAnchor" parent="." instance=ExtResource("6_x0uc3")]
-
-[node name="Pitcher" parent="." instance=ExtResource("7_ar4t0")]
-position = Vector2(16, 120)
+[node name="Goal" parent="." instance=ExtResource("11_2cqxi")]
+position = Vector2(60, 76)
 
 [node name="Keys" type="Node" parent="."]
 
@@ -75,8 +64,7 @@ position = Vector2(224, 54)
 collision_layer = 0
 collision_mask = 2
 
-[node name="Goal" parent="." instance=ExtResource("11_2cqxi")]
-position = Vector2(60, 76)
+[node name="Entities" type="Node" parent="."]
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
@@ -165,10 +153,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = -97.0
-offset_right = 204.0
-offset_bottom = 19.0
+offset_left = 18.0
+offset_top = -119.0
+offset_right = 206.0
+offset_bottom = 70.0
 grow_vertical = 2
 rotation = 0.0523599
 theme_override_fonts/normal_font = ExtResource("10_at2w1")
@@ -183,13 +171,14 @@ autowrap_mode = 0
 vertical_alignment = 1
 
 [node name="HighScoreText" type="RichTextLabel" parent="Canvas/Results"]
+layout_mode = 0
 offset_left = 81.0
 offset_top = 148.0
 offset_right = 241.0
 offset_bottom = 183.0
 theme_override_fonts/normal_font = ExtResource("10_yhl0x")
 bbcode_enabled = true
-text = "[color=red][tornado radius=3 freq=5]N E W   H I G H   S C O R E !"
+text = "[color=red][tornado radius=3 freq=5]N E W   F A S T E S T   T I M E !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -224,17 +213,22 @@ autowrap_mode = 0
 
 [node name="Indicators" type="Control" parent="Canvas/Results"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 174.0
+offset_right = 320.0
+offset_bottom = 209.0
+pivot_offset = Vector2(160, 18)
 
 [node name="RetryIndicator" type="Control" parent="Canvas/Results/Indicators"]
-anchors_preset = 0
-offset_left = 80.0
-offset_top = 190.0
-offset_right = 80.0
-offset_bottom = 190.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 84.0
+offset_right = 84.0
+grow_vertical = 2
 
 [node name="Label" type="RichTextLabel" parent="Canvas/Results/Indicators/RetryIndicator"]
+layout_mode = 0
 offset_left = 6.0
 offset_top = -12.0
 offset_right = 52.0
@@ -263,13 +257,19 @@ pivot_offset = Vector2(6, 6)
 texture = ExtResource("18_fei6a")
 
 [node name="ContinueIndicator" type="Control" parent="Canvas/Results/Indicators"]
-anchors_preset = 0
-offset_left = 201.0
-offset_top = 190.0
-offset_right = 201.0
-offset_bottom = 190.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_right = -128.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="Label" type="RichTextLabel" parent="Canvas/Results/Indicators/ContinueIndicator"]
+layout_mode = 0
 offset_left = 6.0
 offset_top = -12.0
 offset_right = 69.0

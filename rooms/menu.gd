@@ -18,6 +18,9 @@ enum MenuState { START, SETTINGS, LEVEL_SELECT }
 @onready var settings_picker: Sprite2D = $Menus/SettingsMenu/Picker
 @onready var level_picker: Sprite2D = $Menus/LevelSelectMenu/Picker
 @onready var planets: Node2D = $Menus/LevelSelectMenu/Planets
+@onready var level_name_text: RichTextLabel = $Menus/LevelSelectMenu/LevelNameText
+@onready var highscore_text: RichTextLabel = $Menus/LevelSelectMenu/HighScoreText
+@onready var rank_text: RichTextLabel = $Menus/LevelSelectMenu/RankText
 
 var state = MenuState.START
 var select_index = 1
@@ -113,10 +116,27 @@ func level_select_process(dt: float) -> void:
 
 	if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("up"):
 		select_index = max(0, select_index - 1)
-		planets.get_child(select_index).call("selected")
+		update_planet_info()
 	elif Input.is_action_just_pressed("down") or Input.is_action_just_pressed("right"):
 		select_index = min(planets.get_child_count() - 1, select_index + 1)
-		planets.get_child(select_index).call("selected")
+		update_planet_info()
+
+	# select the level
+	if Input.is_action_just_pressed("c"):
+		var planet = planets.get_child(select_index) as PlanetSelect
+		RoomManager.change_room_level(planet.level_resource.name)
+
+func update_planet_info():
+	planets.get_child(select_index).call("selected")
+	var highscore = planets.get_child(select_index).get_level_highscore()
+	if len(highscore) > 0:
+		level_name_text.text = "[wave freq=5]-  THE " + planets.get_child(select_index).level_resource.name.to_upper() + "  -"
+		highscore_text.text = "[wave freq=5]" + Utils.time_to_text(highscore[0], true)
+		rank_text.text = "[tornado radius=2 freq=5]" + highscore[1][0]
+	else:
+		level_name_text.text = planets.get_child(select_index).level_resource.name
+		highscore_text.text = "-----"
+		rank_text.text = "-"
 
 func change_state(new_state: MenuState) -> void:
 	state = new_state
@@ -133,6 +153,6 @@ func change_state(new_state: MenuState) -> void:
 			camera.position = $Menus/SettingsMenu.position
 		MenuState.LEVEL_SELECT:
 			camera.position = $Menus/LevelSelectMenu.position
-			planets.get_child(select_index).call("selected")
+			update_planet_info()
 		_:
 			camera.position = $Menus/TitleMenu.position

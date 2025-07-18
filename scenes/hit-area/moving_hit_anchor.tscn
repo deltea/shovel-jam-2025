@@ -4,18 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://bmg44mswtdj5v" path="res://scenes/hit-area/hit_anchor.tscn" id="1_vptmg"]
 [ext_resource type="PackedScene" uid="uid://dqm2jcab6otjm" path="res://scenes/dotted-line/dotted_line.tscn" id="3_3k5ny"]
 
-[sub_resource type="Curve2D" id="Curve2D_1kqn1"]
+[sub_resource type="Curve2D" id="Curve2D_3k5ny"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 64, 208, 0, 0, 0, 0, 256, 208)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 200, 0)
 }
 point_count = 2
 
 [node name="MovingHitAnchor" type="Path2D"]
-curve = SubResource("Curve2D_1kqn1")
+curve = SubResource("Curve2D_3k5ny")
 script = ExtResource("1_m11bc")
 
 [node name="PathFollow" type="PathFollow2D" parent="."]
-position = Vector2(64, 208)
 
 [node name="HitAnchor" parent="PathFollow" instance=ExtResource("1_vptmg")]
 z_index = 0

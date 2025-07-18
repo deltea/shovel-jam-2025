@@ -4,7 +4,7 @@ class_name Player extends CharacterBody2D
 @export var max_speed = 150.0
 @export var jump_velocity = 300.0
 @export var gravity = 1200.0
-@export var fall_gravity = 1600.0
+@export var fall_gravity = 1400.0
 @export var wall_fall_velocity = 80.0
 @export var acceleration = 40.0
 @export var deceleration = 15.0
@@ -17,6 +17,7 @@ class_name Player extends CharacterBody2D
 
 @export_category("Animation")
 @export var run_tilt_angle = 20.0
+@export var double_jump_particles: PackedScene
 
 @onready var sprite: Sprite2D = $Sprite
 @onready var dust_parent: Node2D = $DustParent
@@ -77,10 +78,6 @@ func _physics_process(dt: float) -> void:
 		else:
 			velocity.y += gravity * dt
 
-		# variable jump height
-		if Input.is_action_just_released("c") and velocity.y < 0:
-			velocity.y *= 0.5
-
 	if can_move:
 		target_rotation_degrees = x_input * run_tilt_angle
 		if is_hitting:
@@ -99,6 +96,10 @@ func _physics_process(dt: float) -> void:
 				# x deceleration
 				velocity.x = move_toward(velocity.x, 0.0, deceleration)
 				dust_particles.emitting = false
+
+			# variable jump height
+			if Input.is_action_just_released("c") and velocity.y < 0:
+				velocity.y *= 0.5
 	else:
 		velocity.x = 0
 
@@ -115,6 +116,7 @@ func _physics_process(dt: float) -> void:
 
 	if not was_on_floor and is_on_floor():
 		jumped = false
+		can_hit = true
 	elif was_on_floor and not is_on_floor() and not jumped:
 		coyote_timer = 0.0
 
@@ -125,8 +127,6 @@ func _physics_process(dt: float) -> void:
 			(collider as RigidBody2D).apply_force(-collision.get_normal() * push_force)
 
 func swing_bat(dir: Vector2):
-	can_hit = false
-
 	$ParryTimer.start()
 
 	var tween = get_tree().create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
@@ -143,13 +143,22 @@ func swing_bat(dir: Vector2):
 			velocity = dir * parry_velocity + Vector2(0, -parry_extra_y)
 			filtered_collisions[0].hit()
 			RoomManager.current_room.camera.impact_tilt(direction)
+		else:
+			is_hitting = true
+			velocity = dir * 120 + Vector2(0, -parry_extra_y)
+			can_hit = false
+
+			var particles = double_jump_particles.instantiate() as CPUParticles2D
+			particles.global_position = global_position
+			particles.emitting = true
+			particles.connect("finished", particles.queue_free)
+			RoomManager.current_room.add_child(particles)
 	)
 
 	tween.chain().tween_property(bat_anchor, "scale:x", 1, 0.15).set_delay(0.1)
 	tween.tween_property(bat_sprite, "rotation", deg_to_rad(20), 0.15)
 	tween.chain().tween_callback(func():
 		bat_anchor.z_index = -5
-		can_hit = true
 	)
 
 func _on_parry_timer_timeout() -> void:

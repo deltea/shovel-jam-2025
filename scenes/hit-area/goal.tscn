@@ -1,19 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8geeqbbs3mvq"]
+[gd_scene load_steps=7 format=3 uid="uid://c8geeqbbs3mvq"]
 
 [ext_resource type="PackedScene" uid="uid://neagtykblwvx" path="res://scenes/hit-area/hit_area.tscn" id="1_o31oi"]
-[ext_resource type="Texture2D" uid="uid://bxtc5illu43wy" path="res://assets/generic/circle-big.png" id="2_3pfgg"]
 [ext_resource type="Script" uid="uid://bh6makumhhax7" path="res://scenes/hit-area/goal.gd" id="2_in8w6"]
+[ext_resource type="Texture2D" uid="uid://ca6ukpfdumdrd" path="res://assets/goal.png" id="3_in8w6"]
+[ext_resource type="Texture2D" uid="uid://c8vebnkhtxxr6" path="res://assets/generic/circle.png" id="4_1331u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3pfgg"]
 radius = 16.0
 
+[sub_resource type="Curve" id="Curve_1331u"]
+_data = [Vector2(0.0225759, 1), 0.0, 0.0, 0, 0, Vector2(0.820133, 0.539445), 0.0, 0.0, 0, 0, Vector2(1, 0.187662), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="Goal" instance=ExtResource("1_o31oi")]
+z_index = -2
 script = ExtResource("2_in8w6")
 disabled_color = Color(0, 0, 1, 1)
 enabled_color = Color(1, 0, 0, 1)
 
 [node name="Sprite" parent="." index="0"]
-texture = ExtResource("2_3pfgg")
+texture = ExtResource("3_in8w6")
 
 [node name="CollisionShape" parent="." index="1"]
 shape = SubResource("CircleShape2D_3pfgg")
+
+[node name="Particles" type="CPUParticles2D" parent="." index="4"]
+z_index = -1
+texture = ExtResource("4_1331u")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 20.0
+scale_amount_curve = SubResource("Curve_1331u")

@@ -9,3 +9,10 @@ func _process(dt: float) -> void:
 
 func selected():
 	PaletteFilter.set_color_palette(level_resource.palette)
+
+func get_level_highscore():
+	if SaveManager.save_data.has("level_" + level_resource.name + "_time"):
+		var time = SaveManager.save_data["level_" + level_resource.name + "_time"]
+		return [time, Utils.get_ranking(time)]
+	else:
+		return []

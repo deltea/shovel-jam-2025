@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvkemnlxkp83w"
-path="res://.godot/imported/dream.png-c6e5c8ddccc97d18668b50885cd6c852.ctex"
+uid="uid://ca6ukpfdumdrd"
+path="res://.godot/imported/goal.png-0c667cdea5a1e49b564b867d565eb4ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://color-palettes/dream.png"
-dest_files=["res://.godot/imported/dream.png-c6e5c8ddccc97d18668b50885cd6c852.ctex"]
+source_file="res://assets/goal.png"
+dest_files=["res://.godot/imported/goal.png-0c667cdea5a1e49b564b867d565eb4ec.ctex"]
 
 [params]
 

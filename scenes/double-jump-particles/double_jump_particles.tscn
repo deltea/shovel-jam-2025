@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp1n2w0y5ala2"]
+
+[ext_resource type="Texture2D" uid="uid://c8vebnkhtxxr6" path="res://assets/generic/circle.png" id="1_05ukb"]
+
+[sub_resource type="Curve" id="Curve_p47bc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8849, 0.619297), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.323627), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="DoubleJumpParticles" type="CPUParticles2D"]
+emitting = false
+amount = 3
+texture = ExtResource("1_05ukb")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 8.0
+initial_velocity_max = 10.0
+damping_min = 10.0
+damping_max = 10.0
+scale_amount_min = 0.6
+scale_amount_max = 0.8
+scale_amount_curve = SubResource("Curve_p47bc")
+color = Color(0.333333, 0.333333, 0.333333, 1)

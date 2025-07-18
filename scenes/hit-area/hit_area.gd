@@ -5,7 +5,7 @@ class_name HitArea extends Area2D
 @onready var strike_timer = $StrikeTimer
 
 func _process(dt: float) -> void:
-	sprite.scale = sprite.scale.lerp(Vector2.ONE, 12 * dt)
+	sprite.scale = sprite.scale.lerp(Vector2.ONE, 10 * dt)
 
 func hit() -> void:
 	Clock.hitstop(0.1)
