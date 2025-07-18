@@ -8,13 +8,16 @@ func _ready() -> void:
 	player.play("transition")
 	PaletteFilter.set_color_palette(current_room.palette)
 
+# func _process(_dt: float) -> void:
+# 	player.advance(Clock.unscaled_dt)
+
 func change_room(room: String):
 	player.play_backwards("transition")
 	await Clock.wait(0.5)
 
 	var path = "res://rooms/" + room + ".tscn"
 	if !ResourceLoader.exists(path):
-		printerr("Room not found: " + path)
+		printerr("room not found: " + path)
 		return
 
 	var scene = load(path)

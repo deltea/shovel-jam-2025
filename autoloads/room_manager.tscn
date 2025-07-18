@@ -65,6 +65,7 @@ _data = {
 }
 
 [node name="RoomManager" type="CanvasLayer"]
+layer = 10
 script = ExtResource("1_ek3bw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

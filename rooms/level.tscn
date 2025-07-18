@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bp3plwo8243wy"]
+[gd_scene load_steps=17 format=4 uid="uid://bp3plwo8243wy"]
 
 [ext_resource type="Script" uid="uid://c65lao1k8q5b1" path="res://rooms/level.gd" id="1_ar4t0"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_4ve75"]
@@ -9,8 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://buh772eiaa5bm" path="res://scenes/hit-area/moving_hit_anchor.tscn" id="6_x0uc3"]
 [ext_resource type="PackedScene" uid="uid://dpiqml0sgr8ba" path="res://scenes/pitcher/pitcher.tscn" id="7_ar4t0"]
 [ext_resource type="PackedScene" uid="uid://bt1awmtu5v0rs" path="res://scenes/key/key.tscn" id="9_knkn0"]
+[ext_resource type="FontFile" uid="uid://cfylsgfwp1fy4" path="res://assets/fonts/GAMEPLAY-1987.ttf" id="10_at2w1"]
 [ext_resource type="FontFile" uid="uid://dtec4w8hxc3v4" path="res://assets/fonts/hefty-me.ttf" id="10_yhl0x"]
 [ext_resource type="PackedScene" uid="uid://c8geeqbbs3mvq" path="res://scenes/hit-area/goal.tscn" id="11_2cqxi"]
+[ext_resource type="FontFile" uid="uid://bor1qax0ecsmb" path="res://assets/fonts/mania.ttf" id="11_at2w1"]
+[ext_resource type="Texture2D" uid="uid://cn4iikkntcgoa" path="res://assets/results-background.png" id="12_wrbck"]
+[ext_resource type="FontFile" uid="uid://c80aa3bvmohf8" path="res://assets/fonts/RacingMarkRace-Regular.otf" id="14_4r1re"]
+[ext_resource type="Texture2D" uid="uid://bucoma1fat6is" path="res://assets/banner.png" id="15_mlrue"]
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("goal", "keys_parent")]
 script = ExtResource("1_ar4t0")
@@ -21,8 +26,8 @@ limit_top = -20
 limit_left = -20
 limit_bottom = 260
 limit_right = 340
-metadata/_edit_horizontal_guides_ = [120.0, 240.0]
-metadata/_edit_vertical_guides_ = [160.0, 320.0]
+metadata/_edit_horizontal_guides_ = [120.0, 240.0, -256.0, -16.0]
+metadata/_edit_vertical_guides_ = [160.0, 320.0, 0.0]
 
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(0.266667, 0.266667, 0.266667, 1)
@@ -53,35 +58,155 @@ position = Vector2(16, 120)
 
 [node name="Keys" type="Node" parent="."]
 
-[node name="Key" parent="Keys" instance=ExtResource("9_knkn0")]
-position = Vector2(264, 160)
-collision_layer = 0
-collision_mask = 2
-
 [node name="Key2" parent="Keys" instance=ExtResource("9_knkn0")]
 position = Vector2(50, 157)
 collision_layer = 0
 collision_mask = 2
 
 [node name="Key3" parent="Keys" instance=ExtResource("9_knkn0")]
-position = Vector2(222, 59)
+position = Vector2(256, 157)
 collision_layer = 0
 collision_mask = 2
 
+[node name="Key4" parent="Keys" instance=ExtResource("9_knkn0")]
+position = Vector2(224, 54)
+collision_layer = 0
+collision_mask = 2
+
+[node name="Goal" parent="." instance=ExtResource("11_2cqxi")]
+position = Vector2(60, 76)
+
 [node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="KeysText" type="RichTextLabel" parent="Canvas"]
-offset_left = 140.0
-offset_top = 214.0
-offset_right = 180.0
-offset_bottom = 234.0
+[node name="TimeText" type="RichTextLabel" parent="Canvas"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_right = 160.0
+offset_bottom = 30.0
+grow_horizontal = 2
+pivot_offset = Vector2(160, 0)
 theme_override_fonts/normal_font = ExtResource("10_yhl0x")
+bbcode_enabled = true
+text = "[wave freq=2 amp=8]1 : 25 . 32"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeysText" type="RichTextLabel" parent="Canvas"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -30.0
+offset_right = 24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("11_at2w1")
+theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "[wave]X X -"
 horizontal_alignment = 3
 vertical_alignment = 1
 
-[node name="Goal" parent="." instance=ExtResource("11_2cqxi")]
-position = Vector2(60, 76)
+[node name="Results" type="Control" parent="Canvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -256.0
+offset_right = 320.0
+
+[node name="ResultsBackground" type="TextureRect" parent="Canvas/Results"]
+layout_mode = 2
+offset_right = 320.0
+offset_bottom = 256.0
+texture = ExtResource("12_wrbck")
+
+[node name="RankText" type="RichTextLabel" parent="Canvas/Results"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -132.33
+offset_top = 60.287
+offset_right = -0.330444
+offset_bottom = 182.287
+grow_horizontal = 0
+rotation = 0.0523599
+pivot_offset = Vector2(99.4572, 68.1653)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_offset_x = 8
+theme_override_fonts/normal_font = ExtResource("14_4r1re")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[shake level=10 rate=32]A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TopBanner" type="TextureRect" parent="Canvas/Results"]
+layout_mode = 0
+offset_left = -13.0
+offset_top = -27.0
+offset_right = 335.0
+offset_bottom = 23.0
+rotation = 0.0523599
+texture = ExtResource("15_mlrue")
+stretch_mode = 1
+
+[node name="Banner" type="ColorRect" parent="Canvas/Results"]
+layout_mode = 0
+offset_left = -34.0
+offset_top = 205.0
+offset_right = 372.0
+offset_bottom = 220.0
+rotation = 0.0523599
+color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="BannerText1" type="RichTextLabel" parent="Canvas/Results/Banner"]
+layout_mode = 1
+offset_right = 406.0
+offset_bottom = 15.0
+theme_override_fonts/normal_font = ExtResource("10_yhl0x")
+bbcode_enabled = true
+text = " AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  "
+fit_content = true
+autowrap_mode = 0
+
+[node name="BannerText2" type="RichTextLabel" parent="Canvas/Results/Banner"]
+layout_mode = 1
+offset_right = 406.0
+offset_bottom = 15.0
+theme_override_fonts/normal_font = ExtResource("10_yhl0x")
+bbcode_enabled = true
+text = " AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  "
+fit_content = true
+autowrap_mode = 0
+
+[node name="ResultsText" type="RichTextLabel" parent="Canvas/Results"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -65.0
+offset_right = 204.0
+offset_bottom = 51.0
+grow_vertical = 2
+rotation = 0.0523599
+theme_override_fonts/normal_font = ExtResource("10_at2w1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[wave freq=2 amp=6][color=#555]TIME[/color]   3:45.20
+
+
+[color=#444]STRIKE  1[/color]   0:10.02
+[color=#444]STRIKE  2[/color]   2:20.50
+[color=#444]STRIKE  3[/color]   5:53.86"
+autowrap_mode = 0
+vertical_alignment = 1
 
 [editable path="Tilemap"]

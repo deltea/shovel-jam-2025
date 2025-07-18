@@ -78,7 +78,6 @@ scale = Vector2(-1, 1)
 self_modulate = Color(0, 0, 1, 1)
 position = Vector2(7, 0.715978)
 rotation = 0.349066
-scale = Vector2(1, 1)
 texture = ExtResource("4_lvxji")
 offset = Vector2(-0.373506, -11.0595)
 

@@ -13,3 +13,4 @@ var player: Player
 
 func _enter_tree() -> void:
 	RoomManager.current_room = self
+	# Engine.time_scale = 1.0

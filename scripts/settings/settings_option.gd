@@ -35,7 +35,7 @@ func value_to_label(value: int) -> String:
 		var label_str = ""
 		for i in range(value_max):
 			if i < value:
-				label_str += "0"
+				label_str += "X"
 			else:
 				label_str += "-"
 		return option_name + " " + label_str
