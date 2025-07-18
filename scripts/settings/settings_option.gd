@@ -11,22 +11,32 @@ var current_value = 0
 var option_name = "OPTION"
 
 func _ready() -> void:
-	current_value = initial_value
+	if SaveManager.save_data.has(option_name + "_setting"):
+		current_value = SaveManager.save_data[option_name + "_setting"]
+	else:
+		current_value = initial_value
+
 	label.text = value_to_label(current_value)
+	set_value(current_value)
 
 # value is 1 or -1
 func change_value(value: int) -> void:
 	current_value = fmod(current_value + 1, value_max) if bool_value else clamp(current_value + value, value_min, value_max)
+
+	SaveManager.save_data[option_name + "_setting"] = current_value
+	SaveManager.save_game()
+
 	label.text = value_to_label(current_value)
 	RoomManager.current_room.camera.shake(0.08, 1.5)
+
+	set_value(current_value)
+
+# override this
+func set_value(value: int) -> void:
+	pass
 
 func select():
-	if not bool_value:
-		return
-
-	current_value = fmod(current_value + 1, value_max)
-	label.text = value_to_label(current_value)
-	RoomManager.current_room.camera.shake(0.08, 1.5)
+	pass
 
 func value_to_label(value: int) -> String:
 	if bool_value:

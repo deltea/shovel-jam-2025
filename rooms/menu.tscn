@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://dmf0uqbm0q3tv"]
+[gd_scene load_steps=36 format=4 uid="uid://dmf0uqbm0q3tv"]
 
 [ext_resource type="Script" uid="uid://yqfpk2rabjnu" path="res://rooms/menu.gd" id="1_xe0oa"]
 [ext_resource type="Texture2D" uid="uid://dacgill14tub8" path="res://assets/star.png" id="2_eppcc"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://do2wnkt8yjiwh" path="res://assets/planets/tree.png" id="17_c5vw0"]
 [ext_resource type="Texture2D" uid="uid://byi4yw732e6d1" path="res://assets/generic/circle-huge.png" id="17_ge625"]
 [ext_resource type="Texture2D" uid="uid://dy8ev3uv4wl4k" path="res://assets/planets/saturn.png" id="18_c8n0j"]
+[ext_resource type="Script" uid="uid://dieyaxp56jt4r" path="res://rooms/trash_option.gd" id="19_5bl6l"]
 [ext_resource type="Texture2D" uid="uid://cafpt6ok536h2" path="res://assets/planets/mushroom.png" id="19_ge625"]
 [ext_resource type="Resource" uid="uid://bv1lcpulvfomi" path="res://levels/test.tres" id="19_infbm"]
 [ext_resource type="Script" uid="uid://cbsgtcl8vp1ho" path="res://scripts/resources/level_resource.gd" id="20_dkmxh"]
@@ -198,11 +199,12 @@ offset_right = 49.0
 offset_bottom = 12.0
 theme_override_fonts/normal_font = ExtResource("6_h707c")
 bbcode_enabled = true
-text = "BACK"
+text = "back"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BackButtonIcon" type="Sprite2D" parent="Menus/TitleMenu/BackIndicator"]
+self_modulate = Color(0, 0, 1, 1)
 texture = ExtResource("11_7u8qn")
 
 [node name="SelectIndicator" type="Node2D" parent="Menus/TitleMenu"]
@@ -221,6 +223,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SelectIcon" type="Sprite2D" parent="Menus/TitleMenu/SelectIndicator"]
+self_modulate = Color(0, 0, 1, 1)
 texture = ExtResource("12_e6bxe")
 
 [node name="SettingsMenu" type="Node2D" parent="Menus"]
@@ -315,6 +318,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TrashOption" type="Node2D" parent="Menus/SettingsMenu/Options"]
 position = Vector2(0, 73)
+script = ExtResource("19_5bl6l")
 
 [node name="Label" type="RichTextLabel" parent="Menus/SettingsMenu/Options/TrashOption"]
 z_index = 5

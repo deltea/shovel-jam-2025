@@ -1,5 +1,6 @@
 class_name Level extends Room
 
+@export var level_resource: LevelResource
 @export var goal: Goal
 @export var keys_parent: Node
 
@@ -10,6 +11,8 @@ class_name Level extends Room
 @onready var rank_text: RichTextLabel = $Canvas/Results/RankText
 @onready var banner_text_1: RichTextLabel = $Canvas/Results/Banner/BannerText1
 @onready var banner_text_2: RichTextLabel = $Canvas/Results/Banner/BannerText2
+@onready var indicators: Control = $Canvas/Results/Indicators
+@onready var highscore_text: RichTextLabel = $Canvas/Results/HighScoreText
 
 var keys = []
 var original_keys_length = 0
@@ -18,6 +21,7 @@ var end_time = 0.0
 var strike_times = []
 var results_shown = false
 var banner_width = 0.0
+var timer = 0.0
 
 func _ready() -> void:
 	keys = keys_parent.get_children()
@@ -25,10 +29,14 @@ func _ready() -> void:
 	update_keys()
 
 func _process(dt: float) -> void:
-	time_text.text = time_to_text(Clock.time, true)
+	time_text.text = time_to_text(timer, true)
+	timer += dt
 
-	if results_shown and Input.is_action_just_pressed("c"):
-		RoomManager.change_room("menu")
+	if results_shown:
+		if Input.is_action_just_pressed("c"):
+			RoomManager.change_room("menu")
+		if Input.is_action_just_pressed("x"):
+			RoomManager.reload_level()
 
 	# scroll banner text to the right forever with no gaps at a set speed
 	banner_text_1.position.x -= 50 * dt
@@ -39,10 +47,13 @@ func _process(dt: float) -> void:
 				banner_text_1.position.x = banner_text_2.position.x + banner_width
 		if banner_text_2.position.x + banner_width < 0:
 				banner_text_2.position.x = banner_text_1.position.x + banner_width
+	else:
+		if Input.is_action_just_pressed("restart"):
+			RoomManager.reload_level()
 
 func collect_key(key: Key) -> void:
 	keys.erase(key)
-	strike_times.append(Clock.time)
+	strike_times.append(timer)
 	print(str(keys.size()) + " keys left")
 	update_keys()
 	if keys.size() == 0:
@@ -68,11 +79,11 @@ func hit_goal():
 	time_text.visible = false
 	keys_text.visible = false
 
-	end_time = Clock.time
+	end_time = timer
 	var rank = get_ranking(end_time)
 
 	var text = "[wave freq=2 amp=6][color=#555]TIME[/color]   "
-	text += time_to_text(end_time) + "\n\n\n"
+	text += time_to_text(end_time) + "\n\n"
 	for i in range(len(strike_times)):
 		text += "[color=#444]STRIKE  " + str(i + 1) + "[/color]   " + time_to_text(strike_times[i]) + "\n"
 	results_text.text = text
@@ -89,6 +100,23 @@ func hit_goal():
 	banner_text_1.position.x = 0.0
 	banner_text_2.position.x = banner_width
 
+	indicators.visible = false
+	highscore_text.visible = false
+
+	# save time
+	var beat_highscore = false
+	if level_resource:
+		if SaveManager.save_data.has("level_" + level_resource.name + "_time"):
+			var previous_highscore = SaveManager.save_data["level_" + level_resource.name + "_time"]
+			if end_time < previous_highscore:
+				beat_highscore = true
+				SaveManager.save_data["level_" + level_resource.name + "_time"] = end_time
+				SaveManager.save_game()
+		else:
+			beat_highscore = true
+			SaveManager.save_data["level_" + level_resource.name + "_time"] = end_time
+			SaveManager.save_game()
+
 	var tween = get_tree().create_tween().set_parallel(true).set_ignore_time_scale(true)
 	tween.tween_property(Engine, "time_scale", 0.0, 0.6)
 	tween.tween_property(results, "position:y", 0.0, 1.0).set_delay(1.0).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
@@ -99,8 +127,13 @@ func hit_goal():
 		rank_text.scale = Vector2.ONE * 3.5
 	)
 	tween.chain().tween_property(rank_text, "scale", Vector2.ONE, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.chain().tween_property(results_text, "visible_ratio", 1.0, 1.0)
-	tween.chain().tween_callback(func(): results_shown = true)
+	tween.chain().tween_callback(func(): RoomManager.current_room.camera.shake(0.1, 1.5))
+	tween.chain().tween_property(results_text, "visible_ratio", 1.5, 1.0)
+	tween.chain().tween_callback(func():
+		indicators.visible = true
+		highscore_text.visible = beat_highscore
+		results_shown = true
+	)
 
 func time_to_text(time: float, spacing: bool = false) -> String:
 	var minutes = int(time / 60)

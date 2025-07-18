@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=4 uid="uid://bp3plwo8243wy"]
+[gd_scene load_steps=19 format=4 uid="uid://bp3plwo8243wy"]
 
 [ext_resource type="Script" uid="uid://c65lao1k8q5b1" path="res://rooms/level.gd" id="1_ar4t0"]
-[ext_resource type="Texture2D" uid="uid://dcrhnx773byso" path="res://color-palettes/strange.png" id="2_3r5wm"]
+[ext_resource type="Resource" uid="uid://bv1lcpulvfomi" path="res://levels/test.tres" id="2_3qwok"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_4ve75"]
 [ext_resource type="PackedScene" uid="uid://v0qlcyty6g8i" path="res://scenes/tilemap/tilemap.tscn" id="3_tibj6"]
 [ext_resource type="PackedScene" uid="uid://b1mxsisctpeug" path="res://scenes/player/player.tscn" id="5_dg3qb"]
@@ -16,12 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://cn4iikkntcgoa" path="res://assets/results-background.png" id="12_wrbck"]
 [ext_resource type="FontFile" uid="uid://c80aa3bvmohf8" path="res://assets/fonts/RacingMarkRace-Regular.otf" id="14_4r1re"]
 [ext_resource type="Texture2D" uid="uid://bucoma1fat6is" path="res://assets/banner.png" id="15_mlrue"]
+[ext_resource type="Texture2D" uid="uid://cpjag6sp0qyhn" path="res://assets/icons/x_button.png" id="18_fei6a"]
+[ext_resource type="Texture2D" uid="uid://v3u8y2amcuwn" path="res://assets/icons/c_button.png" id="19_dsxex"]
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("goal", "keys_parent")]
 script = ExtResource("1_ar4t0")
+level_resource = ExtResource("2_3qwok")
 goal = NodePath("Goal")
 keys_parent = NodePath("Keys")
-palette = ExtResource("2_3r5wm")
 limit_top = -20
 limit_left = -20
 limit_bottom = 260
@@ -124,17 +126,18 @@ offset_bottom = 256.0
 texture = ExtResource("12_wrbck")
 
 [node name="RankText" type="RichTextLabel" parent="Canvas/Results"]
+z_index = 5
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -132.33
-offset_top = 60.287
-offset_right = -0.330444
-offset_bottom = 182.287
+offset_left = -131.965
+offset_top = 38.0
+offset_right = 0.03479
+offset_bottom = 160.0
 grow_horizontal = 0
 rotation = 0.0523599
-pivot_offset = Vector2(99.4572, 68.1653)
+pivot_offset = Vector2(106.585, 61.0003)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 0
@@ -150,12 +153,45 @@ vertical_alignment = 1
 [node name="TopBanner" type="TextureRect" parent="Canvas/Results"]
 layout_mode = 0
 offset_left = -13.0
-offset_top = -27.0
+offset_top = -36.0
 offset_right = 335.0
-offset_bottom = 23.0
+offset_bottom = 14.0
 rotation = 0.0523599
 texture = ExtResource("15_mlrue")
 stretch_mode = 1
+
+[node name="ResultsText" type="RichTextLabel" parent="Canvas/Results"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -97.0
+offset_right = 204.0
+offset_bottom = 19.0
+grow_vertical = 2
+rotation = 0.0523599
+theme_override_fonts/normal_font = ExtResource("10_at2w1")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[wave freq=2 amp=6][color=#555]TIME[/color]   3:45.20
+
+[color=#444]STRIKE  1[/color]   0:10.02
+[color=#444]STRIKE  2[/color]   2:20.50
+[color=#444]STRIKE  3[/color]   5:53.86"
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="HighScoreText" type="RichTextLabel" parent="Canvas/Results"]
+offset_left = 81.0
+offset_top = 148.0
+offset_right = 241.0
+offset_bottom = 183.0
+theme_override_fonts/normal_font = ExtResource("10_yhl0x")
+bbcode_enabled = true
+text = "[color=red][tornado radius=3 freq=5]N E W   H I G H   S C O R E !"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Banner" type="ColorRect" parent="Canvas/Results"]
 layout_mode = 0
@@ -186,27 +222,79 @@ text = " AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  AMAZING!  "
 fit_content = true
 autowrap_mode = 0
 
-[node name="ResultsText" type="RichTextLabel" parent="Canvas/Results"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = -65.0
-offset_right = 204.0
-offset_bottom = 51.0
-grow_vertical = 2
-rotation = 0.0523599
-theme_override_fonts/normal_font = ExtResource("10_at2w1")
-theme_override_font_sizes/normal_font_size = 16
+[node name="Indicators" type="Control" parent="Canvas/Results"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RetryIndicator" type="Control" parent="Canvas/Results/Indicators"]
+anchors_preset = 0
+offset_left = 80.0
+offset_top = 190.0
+offset_right = 80.0
+offset_bottom = 190.0
+
+[node name="Label" type="RichTextLabel" parent="Canvas/Results/Indicators/RetryIndicator"]
+offset_left = 6.0
+offset_top = -12.0
+offset_right = 52.0
+offset_bottom = 12.0
+theme_override_fonts/normal_font = ExtResource("10_yhl0x")
 bbcode_enabled = true
-text = "[wave freq=2 amp=6][color=#555]TIME[/color]   3:45.20
-
-
-[color=#444]STRIKE  1[/color]   0:10.02
-[color=#444]STRIKE  2[/color]   2:20.50
-[color=#444]STRIKE  3[/color]   5:53.86"
-autowrap_mode = 0
+text = "retry"
+horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RetryIcon" type="TextureRect" parent="Canvas/Results/Indicators/RetryIndicator"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(6, 6)
+texture = ExtResource("18_fei6a")
+
+[node name="ContinueIndicator" type="Control" parent="Canvas/Results/Indicators"]
+anchors_preset = 0
+offset_left = 201.0
+offset_top = 190.0
+offset_right = 201.0
+offset_bottom = 190.0
+
+[node name="Label" type="RichTextLabel" parent="Canvas/Results/Indicators/ContinueIndicator"]
+offset_left = 6.0
+offset_top = -12.0
+offset_right = 69.0
+offset_bottom = 12.0
+theme_override_fonts/normal_font = ExtResource("10_yhl0x")
+bbcode_enabled = true
+text = "continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueIcon" type="TextureRect" parent="Canvas/Results/Indicators/ContinueIndicator"]
+self_modulate = Color(1, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(6, 6)
+texture = ExtResource("19_dsxex")
 
 [editable path="Tilemap"]

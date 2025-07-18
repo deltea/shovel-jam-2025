@@ -6,7 +6,7 @@ var current_room: Room
 
 func _ready() -> void:
 	player.play("transition")
-	PaletteFilter.set_color_palette(current_room.palette)
+	set_color_palette()
 
 # func _process(_dt: float) -> void:
 # 	player.advance(Clock.unscaled_dt)
@@ -24,7 +24,7 @@ func change_room(room: String):
 	get_tree().change_scene_to_packed(scene)
 
 	await Clock.wait(0.5)
-	PaletteFilter.set_color_palette(current_room.palette)
+	set_color_palette()
 	player.play("transition")
 
 func change_room_from_scene(scene: PackedScene):
@@ -34,9 +34,16 @@ func change_room_from_scene(scene: PackedScene):
 	get_tree().change_scene_to_packed(scene)
 
 	await Clock.wait(0.5)
-	PaletteFilter.set_color_palette(current_room.palette)
+
+	set_color_palette()
 	player.play("transition")
 
-func next_level():
-	var level_num = get_tree().current_scene.name.erase(0, 5).to_int()
-	change_room("levels/level_" + str(level_num + 1))
+func reload_level():
+	if current_room is Level:
+		change_room(current_room.level_resource.name)
+
+func set_color_palette():
+	if current_room is Level:
+		PaletteFilter.set_color_palette(current_room.level_resource.palette)
+	else:
+		PaletteFilter.set_color_palette(current_room.palette)
