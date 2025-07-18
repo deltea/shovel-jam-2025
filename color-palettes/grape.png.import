@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx84ci3abikcs"
-path="res://.godot/imported/gold.png-9172b343087f49eb55f2b616f91cca1d.ctex"
+uid="uid://br6gitsk7ikc5"
+path="res://.godot/imported/grape.png-5beb60189103f00b000df103c06561f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://color-palettes/gold.png"
-dest_files=["res://.godot/imported/gold.png-9172b343087f49eb55f2b616f91cca1d.ctex"]
+source_file="res://color-palettes/grape.png"
+dest_files=["res://.godot/imported/grape.png-5beb60189103f00b000df103c06561f8.ctex"]
 
 [params]
 

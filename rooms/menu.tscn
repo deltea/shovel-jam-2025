@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://yqfpk2rabjnu" path="res://rooms/menu.gd" id="1_xe0oa"]
 [ext_resource type="Texture2D" uid="uid://dacgill14tub8" path="res://assets/star.png" id="2_eppcc"]
 [ext_resource type="PackedScene" uid="uid://v0qlcyty6g8i" path="res://scenes/tilemap/tilemap.tscn" id="2_iqh05"]
-[ext_resource type="Texture2D" uid="uid://c7ufww46b2d3j" path="res://color-palettes/silver.png" id="2_rwvnf"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_slw2s"]
 [ext_resource type="Texture2D" uid="uid://b7ftc2jp27cxc" path="res://assets/big-star.png" id="3_5bl6l"]
+[ext_resource type="Texture2D" uid="uid://dcrhnx773byso" path="res://color-palettes/strange.png" id="4_5bl6l"]
 [ext_resource type="PackedScene" uid="uid://bidf0spt461wy" path="res://scenes/camera/camera.tscn" id="4_cpwjf"]
 [ext_resource type="FontFile" uid="uid://cfylsgfwp1fy4" path="res://assets/fonts/GAMEPLAY-1987.ttf" id="5_e0ykq"]
 [ext_resource type="FontFile" uid="uid://dtec4w8hxc3v4" path="res://assets/fonts/hefty-me.ttf" id="6_h707c"]
@@ -34,7 +34,7 @@
 [sub_resource type="Resource" id="Resource_04yeq"]
 script = ExtResource("20_dkmxh")
 name = "test"
-palette = ExtResource("2_rwvnf")
+palette = ExtResource("4_5bl6l")
 metadata/_custom_type_script = "uid://cbsgtcl8vp1ho"
 
 [sub_resource type="Resource" id="Resource_dkmxh"]
@@ -60,7 +60,7 @@ script = ExtResource("1_xe0oa")
 star_texture = ExtResource("2_eppcc")
 big_star_texture = ExtResource("3_5bl6l")
 star_left = 0
-palette = ExtResource("2_rwvnf")
+palette = ExtResource("4_5bl6l")
 limits_enabled = false
 metadata/_edit_vertical_guides_ = [320.0, 160.0, -320.0, -160.0]
 metadata/_edit_horizontal_guides_ = [240.0, 120.0, 480.0, 360.0]

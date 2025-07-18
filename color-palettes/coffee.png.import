@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://72cc1gqpwxp"
-path="res://.godot/imported/spicy.png-e9d9dd7320d7a3b6c4b49a868320f28e.ctex"
+uid="uid://dqhxfuaa07yus"
+path="res://.godot/imported/coffee.png-ae4c446fdf58839a663491c8a879057d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://color-palettes/spicy.png"
-dest_files=["res://.godot/imported/spicy.png-e9d9dd7320d7a3b6c4b49a868320f28e.ctex"]
+source_file="res://color-palettes/coffee.png"
+dest_files=["res://.godot/imported/coffee.png-ae4c446fdf58839a663491c8a879057d.ctex"]
 
 [params]
 

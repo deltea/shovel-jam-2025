@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f1a8unsk6h86"
-path="res://.godot/imported/lmao.png-827b049af9dd1851bd18eb72248ebf1b.ctex"
+uid="uid://4i273hmlarin"
+path="res://.godot/imported/frog.png-fa132592c34d51805c3aca5827e66712.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://color-palettes/lmao.png"
-dest_files=["res://.godot/imported/lmao.png-827b049af9dd1851bd18eb72248ebf1b.ctex"]
+source_file="res://color-palettes/frog.png"
+dest_files=["res://.godot/imported/frog.png-fa132592c34d51805c3aca5827e66712.ctex"]
 
 [params]
 
