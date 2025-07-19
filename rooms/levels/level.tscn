@@ -66,6 +66,8 @@ collision_mask = 2
 
 [node name="Entities" type="Node" parent="."]
 
+[node name="Zones" type="Node2D" parent="."]
+
 [node name="Canvas" type="CanvasLayer" parent="."]
 
 [node name="TimeText" type="RichTextLabel" parent="Canvas"]

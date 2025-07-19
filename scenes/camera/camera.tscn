@@ -6,4 +6,5 @@
 ignore_rotation = false
 limit_smoothed = true
 position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 script = ExtResource("1_xejhd")

@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=4 uid="uid://cyucvt7n8hsv7"]
+[gd_scene load_steps=7 format=4 uid="uid://cyucvt7n8hsv7"]
 
 [ext_resource type="PackedScene" uid="uid://bp3plwo8243wy" path="res://rooms/levels/level.tscn" id="1_mqc0c"]
 [ext_resource type="Resource" uid="uid://bv1lcpulvfomi" path="res://levels/rock.tres" id="2_kptwe"]
 [ext_resource type="PackedScene" uid="uid://bmg44mswtdj5v" path="res://scenes/hit-area/hit_anchor.tscn" id="3_wiq7u"]
+[ext_resource type="PackedScene" uid="uid://b4occvxkgnrew" path="res://scenes/camera-zone/camera_zone.tscn" id="4_wd4vc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wd4vc"]
+size = Vector2(320, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36tuu"]
+size = Vector2(320, 480)
 
 [node name="RockLevel" instance=ExtResource("1_mqc0c")]
 level_resource = ExtResource("2_kptwe")
@@ -56,7 +63,50 @@ position = Vector2(480, 413)
 [node name="HitAnchor8" parent="Entities" index="7" instance=ExtResource("3_wiq7u")]
 position = Vector2(-40, 440)
 
+[node name="CameraZone" parent="Zones" index="0" instance=ExtResource("4_wd4vc")]
+position = Vector2(-160, 120)
+
+[node name="CollisionShape" parent="Zones/CameraZone" index="0"]
+shape = SubResource("RectangleShape2D_wd4vc")
+
+[node name="CameraZone2" parent="Zones" index="1" instance=ExtResource("4_wd4vc")]
+position = Vector2(160, 120)
+
+[node name="CollisionShape" parent="Zones/CameraZone2" index="0"]
+shape = SubResource("RectangleShape2D_wd4vc")
+
+[node name="CameraZone3" parent="Zones" index="2" instance=ExtResource("4_wd4vc")]
+position = Vector2(-160, 360)
+
+[node name="CollisionShape" parent="Zones/CameraZone3" index="0"]
+shape = SubResource("RectangleShape2D_wd4vc")
+
+[node name="CameraZone4" parent="Zones" index="3" instance=ExtResource("4_wd4vc")]
+position = Vector2(480, 360)
+
+[node name="CollisionShape" parent="Zones/CameraZone4" index="0"]
+shape = SubResource("RectangleShape2D_wd4vc")
+
+[node name="CameraZone5" parent="Zones" index="4" instance=ExtResource("4_wd4vc")]
+position = Vector2(480, 120)
+
+[node name="CollisionShape" parent="Zones/CameraZone5" index="0"]
+shape = SubResource("RectangleShape2D_wd4vc")
+
+[node name="CameraZone6" parent="Zones" index="5" instance=ExtResource("4_wd4vc")]
+position = Vector2(160, 360)
+
+[node name="CollisionShape" parent="Zones/CameraZone6" index="0"]
+position = Vector2(0, 120)
+shape = SubResource("RectangleShape2D_36tuu")
+
 [node name="Results" parent="Canvas" index="2"]
 visible = false
 
 [editable path="Tilemap"]
+[editable path="Zones/CameraZone"]
+[editable path="Zones/CameraZone2"]
+[editable path="Zones/CameraZone3"]
+[editable path="Zones/CameraZone4"]
+[editable path="Zones/CameraZone5"]
+[editable path="Zones/CameraZone6"]
