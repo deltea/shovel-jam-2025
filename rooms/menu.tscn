@@ -252,7 +252,7 @@ position = Vector2(0, 16)
 script = ExtResource("14_knqm1")
 value_max = 6
 value_min = 1
-initial_value = 3
+initial_value = 2
 
 [node name="Label" type="RichTextLabel" parent="Menus/SettingsMenu/Options/WindowOption"]
 z_index = 5

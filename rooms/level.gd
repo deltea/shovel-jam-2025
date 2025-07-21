@@ -53,6 +53,8 @@ func _process(dt: float) -> void:
 	else:
 		if Input.is_action_just_pressed("restart"):
 			RoomManager.reload_level()
+		if Input.is_action_just_pressed("esc"):
+			RoomManager.change_room("menu")
 
 func collect_key(key: Key) -> void:
 	keys.erase(key)
