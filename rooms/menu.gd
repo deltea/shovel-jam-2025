@@ -38,6 +38,15 @@ func _ready() -> void:
 		star_parent.add_child(star)
 	add_child(star_parent)
 
+	# set planet lock states
+	for i in range(planets.get_child_count()):
+		if i == 0: continue
+		print(i)
+
+		var previous = planets.get_child(i - 1) as PlanetSelect
+		planets.get_child(i).locked = previous.get_level_highscore() == []
+		planets.get_child(i).update_locked_texture()
+
 func _process(dt: float) -> void:
 	# process for current state
 	if state == MenuState.START:
@@ -124,12 +133,23 @@ func level_select_process(dt: float) -> void:
 	# select the level
 	if Input.is_action_just_pressed("c"):
 		var planet = planets.get_child(select_index) as PlanetSelect
-		RoomManager.change_room_level(planet.level_resource.name)
+		if planet.locked:
+			RoomManager.current_room.camera.shake(0.1, 2.0)
+		else:
+			RoomManager.change_room_level(planet.level_resource.name)
 
 func update_planet_info():
-	planets.get_child(select_index).call("selected")
-	var highscore = planets.get_child(select_index).get_level_highscore()
-	level_name_text.text = "[wave freq=5]-  THE " + planets.get_child(select_index).level_resource.name.to_upper() + "  -"
+	var selected_planet = planets.get_child(select_index)
+	selected_planet.call("select")
+
+	if selected_planet.locked:
+		level_name_text.text = "  LOCKED  "
+		highscore_text.text = " "
+		rank_text.text = ""
+		return
+
+	var highscore = selected_planet.get_level_highscore()
+	level_name_text.text = "[wave freq=5]-  THE " + selected_planet.level_resource.name.to_upper() + "  -"
 	if len(highscore) > 0:
 		highscore_text.text = "[wave freq=5]" + Utils.time_to_text(highscore[0], true)
 		rank_text.text = "[tornado radius=2 freq=5]" + highscore[1][0]
