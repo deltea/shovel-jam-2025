@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LevelResource" load_steps=3 format=3 uid="uid://dqi3may08cowp"]
+
+[ext_resource type="Texture2D" uid="uid://cofy823rpklfr" path="res://color-palettes/electric.png" id="1_pxtki"]
+[ext_resource type="Script" uid="uid://cbsgtcl8vp1ho" path="res://scripts/resources/level_resource.gd" id="2_cc8i3"]
+
+[resource]
+script = ExtResource("2_cc8i3")
+name = "city"
+palette = ExtResource("1_pxtki")
+metadata/_custom_type_script = "uid://cbsgtcl8vp1ho"

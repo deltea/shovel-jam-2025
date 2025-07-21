@@ -129,12 +129,11 @@ func level_select_process(dt: float) -> void:
 func update_planet_info():
 	planets.get_child(select_index).call("selected")
 	var highscore = planets.get_child(select_index).get_level_highscore()
+	level_name_text.text = "[wave freq=5]-  THE " + planets.get_child(select_index).level_resource.name.to_upper() + "  -"
 	if len(highscore) > 0:
-		level_name_text.text = "[wave freq=5]-  THE " + planets.get_child(select_index).level_resource.name.to_upper() + "  -"
 		highscore_text.text = "[wave freq=5]" + Utils.time_to_text(highscore[0], true)
 		rank_text.text = "[tornado radius=2 freq=5]" + highscore[1][0]
 	else:
-		level_name_text.text = planets.get_child(select_index).level_resource.name
 		highscore_text.text = "-----"
 		rank_text.text = "-"
 

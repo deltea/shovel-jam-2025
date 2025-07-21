@@ -21,6 +21,6 @@ func _on_pitch_timer_timeout() -> void:
 
 	var ball = ball_scene.instantiate() as Baseball
 	ball.direction = Vector2.from_angle(rotation)
-	ball.position = global_position + ball.direction * 8
+	ball.position = global_position + ball.direction * 16
 	ball.pitch_speed = pitch_speed
 	RoomManager.current_room.add_child(ball)

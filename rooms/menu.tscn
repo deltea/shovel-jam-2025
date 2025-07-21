@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dmf0uqbm0q3tv"]
+[gd_scene load_steps=31 format=4 uid="uid://dmf0uqbm0q3tv"]
 
 [ext_resource type="Script" uid="uid://yqfpk2rabjnu" path="res://rooms/menu.gd" id="1_xe0oa"]
 [ext_resource type="Texture2D" uid="uid://dacgill14tub8" path="res://assets/star.png" id="2_eppcc"]
@@ -24,10 +24,12 @@
 [ext_resource type="Texture2D" uid="uid://dy8ev3uv4wl4k" path="res://assets/planets/saturn.png" id="18_c8n0j"]
 [ext_resource type="Script" uid="uid://dieyaxp56jt4r" path="res://rooms/trash_option.gd" id="19_5bl6l"]
 [ext_resource type="Texture2D" uid="uid://cafpt6ok536h2" path="res://assets/planets/mushroom.png" id="19_ge625"]
-[ext_resource type="Resource" uid="uid://bv1lcpulvfomi" path="res://levels/rock.tres" id="19_infbm"]
-[ext_resource type="Texture2D" uid="uid://ce0bwwb828l6s" path="res://assets/planets/factory.png" id="20_infbm"]
+[ext_resource type="Resource" uid="uid://bv1lcpulvfomi" path="res://levels/crystal.tres" id="19_infbm"]
 [ext_resource type="PackedScene" uid="uid://dqm2jcab6otjm" path="res://scenes/dotted-line/dotted_line.tscn" id="21_c8n0j"]
+[ext_resource type="Resource" uid="uid://r2rawrcfmart" path="res://levels/forest.tres" id="27_eppcc"]
+[ext_resource type="Resource" uid="uid://dq3hdipyefuiw" path="res://levels/mushroom.tres" id="27_hj5sn"]
 [ext_resource type="FontFile" uid="uid://c80aa3bvmohf8" path="res://assets/fonts/RacingMarkRace-Regular.otf" id="28_krndv"]
+[ext_resource type="Resource" uid="uid://dqi3may08cowp" path="res://levels/city.tres" id="29_eppcc"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_xe0oa")
@@ -321,23 +323,19 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAA
 
 [node name="DottedLine" parent="Menus/LevelSelectMenu/Lines" instance=ExtResource("21_c8n0j")]
 position = Vector2(120, 105)
-points = PackedVector2Array(-48, -39, -51, 69)
+points = PackedVector2Array(-48, -39, -35, 60)
 
 [node name="DottedLine2" parent="Menus/LevelSelectMenu/Lines" instance=ExtResource("21_c8n0j")]
 position = Vector2(120, 105)
-points = PackedVector2Array(43, 1, -49, 69)
+points = PackedVector2Array(79, -21, -34, 59)
 
 [node name="DottedLine3" parent="Menus/LevelSelectMenu/Lines" instance=ExtResource("21_c8n0j")]
 position = Vector2(120, 105)
-points = PackedVector2Array(44, 1, 126, 77)
-
-[node name="DottedLine4" parent="Menus/LevelSelectMenu/Lines" instance=ExtResource("21_c8n0j")]
-position = Vector2(120, 105)
-points = PackedVector2Array(125, -41, 125, 77)
+points = PackedVector2Array(80, -23, 126, 77)
 
 [node name="Picker" type="Sprite2D" parent="Menus/LevelSelectMenu"]
 self_modulate = Color(0, 0, 1, 1)
-position = Vector2(163, 104)
+position = Vector2(72, 66)
 texture = ExtResource("17_ge625")
 
 [node name="Planets" type="Node2D" parent="Menus/LevelSelectMenu"]
@@ -346,25 +344,20 @@ texture = ExtResource("17_ge625")
 position = Vector2(73, 66)
 level_resource = ExtResource("19_infbm")
 
+[node name="PlanetSelect4" parent="Menus/LevelSelectMenu/Planets" instance=ExtResource("16_uj4ha")]
+position = Vector2(86, 163)
+texture = ExtResource("19_ge625")
+level_resource = ExtResource("27_hj5sn")
+
 [node name="PlanetSelect2" parent="Menus/LevelSelectMenu/Planets" instance=ExtResource("16_uj4ha")]
-position = Vector2(69, 173)
+position = Vector2(199, 80)
 texture = ExtResource("17_c5vw0")
-level_resource = ExtResource("19_infbm")
+level_resource = ExtResource("27_eppcc")
 
 [node name="PlanetSelect3" parent="Menus/LevelSelectMenu/Planets" instance=ExtResource("16_uj4ha")]
-position = Vector2(163, 105)
+position = Vector2(246, 182)
 texture = ExtResource("18_c8n0j")
-level_resource = ExtResource("19_infbm")
-
-[node name="PlanetSelect4" parent="Menus/LevelSelectMenu/Planets" instance=ExtResource("16_uj4ha")]
-position = Vector2(246, 179)
-texture = ExtResource("19_ge625")
-level_resource = ExtResource("19_infbm")
-
-[node name="PlanetSelect5" parent="Menus/LevelSelectMenu/Planets" instance=ExtResource("16_uj4ha")]
-position = Vector2(248, 66)
-texture = ExtResource("20_infbm")
-level_resource = ExtResource("19_infbm")
+level_resource = ExtResource("29_eppcc")
 
 [node name="LevelNameText" type="RichTextLabel" parent="Menus/LevelSelectMenu"]
 z_index = 10

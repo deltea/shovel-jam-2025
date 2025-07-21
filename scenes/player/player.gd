@@ -5,14 +5,15 @@ class_name Player extends CharacterBody2D
 @export var jump_velocity = 300.0
 @export var gravity = 1200.0
 @export var fall_gravity = 1400.0
-@export var wall_fall_velocity = 80.0
+@export var wall_fall_velocity = 160.0
 @export var acceleration = 40.0
 @export var deceleration = 15.0
 @export var coyote_time = 0.15
 @export var buffer_time = 0.15
 @export var push_force = 0.0
-@export var parry_velocity = 300.0
-@export var parry_extra_y = 200.0
+@export var parry_velocity = 400.0
+@export var double_jump_velocity = 320.0
+@export var parry_extra_y = 100.0
 # @export var parrying_acceleration = 2000.0
 
 @export_category("Animation")
@@ -111,12 +112,14 @@ func _physics_process(dt: float) -> void:
 	if Input.is_action_just_pressed("c") and not is_on_floor():
 		buffer_timer = 0.0
 
+	if is_on_floor():
+		can_hit = true
+
 	var was_on_floor = is_on_floor()
 	move_and_slide()
 
 	if not was_on_floor and is_on_floor():
 		jumped = false
-		can_hit = true
 	elif was_on_floor and not is_on_floor() and not jumped:
 		coyote_timer = 0.0
 
@@ -145,7 +148,7 @@ func swing_bat(dir: Vector2):
 			RoomManager.current_room.camera.impact_tilt(direction)
 		else:
 			is_hitting = true
-			velocity = dir * 120 + Vector2(0, -parry_extra_y)
+			velocity = dir * double_jump_velocity
 			can_hit = false
 
 			var particles = double_jump_particles.instantiate() as CPUParticles2D

@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("2_m4j0e")
-name = "rock"
+name = "crystal"
 palette = ExtResource("1_k8fc2")
 metadata/_custom_type_script = "uid://cbsgtcl8vp1ho"

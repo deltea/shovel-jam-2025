@@ -1,13 +1,13 @@
 extends Node
 
 func get_ranking(time: float) -> Array[String]:
-	if time < 60:
+	if time < 50:
 		return ["S", "SUPERB!"]
-	elif time < 90:
+	elif time < 80:
 		return ["A", "AMAZING!"]
-	elif time < 130:
+	elif time < 120:
 		return ["B", "NICE!"]
-	elif time < 180:
+	elif time < 160:
 		return ["C", "MEH"]
 	else:
 		return ["D", "TOO SLOW!"]

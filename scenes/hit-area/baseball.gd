@@ -16,6 +16,6 @@ func _process(dt: float) -> void:
 	position += direction * pitch_speed * dt
 
 func _on_body_entered(body: Node2D) -> void:
-	# if not body is Player:
-	# 	queue_free()
-	pass
+	if body is TileMapLayer:
+		await Clock.wait(0.2)
+		queue_free()

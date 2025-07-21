@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://bp3plwo8243wy"]
 
-[ext_resource type="Script" uid="uid://c65lao1k8q5b1" path="res://rooms/levels/level.gd" id="1_ar4t0"]
+[ext_resource type="Script" uid="uid://c65lao1k8q5b1" path="res://rooms/level.gd" id="1_ar4t0"]
 [ext_resource type="Texture2D" uid="uid://cdnunui18bx10" path="res://assets/generic/pixel.png" id="2_4ve75"]
 [ext_resource type="PackedScene" uid="uid://v0qlcyty6g8i" path="res://scenes/tilemap/tilemap.tscn" id="3_tibj6"]
 [ext_resource type="PackedScene" uid="uid://b1mxsisctpeug" path="res://scenes/player/player.tscn" id="5_dg3qb"]
@@ -65,8 +65,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="Entities" type="Node" parent="."]
-
-[node name="Zones" type="Node2D" parent="."]
 
 [node name="Canvas" type="CanvasLayer" parent="."]
 
