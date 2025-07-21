@@ -8,4 +8,5 @@ func change_value(value: int) -> void:
 
 func select():
 	SaveManager.delete_save()
-	RoomManager.current_room.camera.shake(0.08, 1.5)
+	RoomManager.current_room.camera.shake(0.2, 2.5)
+	AudioManager.play_sound(AudioManager.strike, 0.2)

@@ -146,10 +146,12 @@ func swing_bat(dir: Vector2):
 			velocity = dir * parry_velocity + Vector2(0, -parry_extra_y)
 			filtered_collisions[0].hit()
 			RoomManager.current_room.camera.impact_tilt(direction)
+			AudioManager.play_sound(AudioManager.hit, 0.2)
 		else:
 			is_hitting = true
 			velocity = dir * double_jump_velocity
 			can_hit = false
+			AudioManager.play_sound(AudioManager.swing, 0.2)
 
 			var particles = double_jump_particles.instantiate() as CPUParticles2D
 			particles.global_position = global_position

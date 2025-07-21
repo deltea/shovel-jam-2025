@@ -22,6 +22,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 		# Clock.hitstop(0.1)
 		RoomManager.current_room.camera.shake(0.1, 1.5)
+		AudioManager.play_sound(AudioManager.strike)
 
 		if RoomManager.current_room is Level:
 			RoomManager.current_room.collect_key(self)

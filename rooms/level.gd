@@ -133,7 +133,10 @@ func hit_goal():
 		rank_text.scale = Vector2.ONE * 3.5
 	)
 	tween.chain().tween_property(rank_text, "scale", Vector2.ONE, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	tween.chain().tween_callback(func(): RoomManager.current_room.camera.shake(0.1, 1.5))
+	tween.chain().tween_callback(func():
+		RoomManager.current_room.camera.shake(0.2, 1.5)
+		AudioManager.play_sound(AudioManager.rank, 0.2)
+	)
 	tween.chain().tween_property(results_text, "visible_ratio", 1.5, 1.0)
 	tween.chain().tween_callback(func():
 		indicators.visible = true

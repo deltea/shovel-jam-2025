@@ -28,6 +28,7 @@ func change_value(value: int) -> void:
 
 	label.text = value_to_label(current_value)
 	RoomManager.current_room.camera.shake(0.08, 1.5)
+	AudioManager.play_sound(AudioManager.hit, 0.2)
 
 	set_value(current_value)
 
